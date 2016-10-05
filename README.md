@@ -1,2 +1,1 @@
-# judgemental-mom
-We're going to change the world.
+https://judgementalmom.com
