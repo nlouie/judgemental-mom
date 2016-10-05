@@ -1,4 +1,12 @@
+Derek Mei
+"Import Use Case"
+
+The user should be able to provide "Judgmental Mom" (JM) with access to their previous Facebook posts and friends list. After providing JM access to their information, JM should be able to pass an aggregation of the user's posts, information, and data into a text analysis API, which will generate a report and compare it to other friends in the user's social network. This will allow a user to see visualized metrics such as the degree of similarity to others in the user's social network as well as recommended playlists and artists.
+
+
 Corey Clemente
 "Analysis Use Case"
 
 The user will provide "Judgmental Mom" (JM) with access to at least one social media account, such as Facebook or Twitter. The user can also provide music account access to services like Spotify or Apple Music. JM will take all this account data (ex. posts, friends and personal information) and analyze this data to generate a report on the user. This report has three main sections: music playlist suggestion, friend comparison, and personality analysis. The music playlist suggestion gives the user new music to listen to by predicting favorability based on user data. The friend comparison provides the user with  graphs and data points showing similarities and differences between friends based on all data. The personality analysis nicely wraps all the data given into a few values, such as economic and political leaning, grammar and most used themes, etc.
+
+
