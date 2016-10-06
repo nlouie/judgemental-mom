@@ -1,0 +1,4 @@
+Cameron Williams
+"Login Use Case"
+
+The user will, when prompted, select a social media account to sign in from, either Facebook or Twitter. When the user selects an account and enters their credentials, "Judgmental Mom" (JM) will check and validate the credentials given by the user. If the credentials are valid, they are logged into JM. If not, an error message will be displayed, and the user will have the option of either reentering valid credentials or selecting a different account to log in from.
