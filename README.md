@@ -17,13 +17,21 @@ lorem ipsum
 
 ## Setting up the Package
 
-lorem ipsum
+First, clone or fork our repository 
 
-`apt-get example etc etc etc.`
+```git clone https://github.com/nlouie/judgemental-mom.git```
+
 
 ## Development
+
+#### Development Notes as we move on
+Please follow proper git usage to avoid conflicts. 
+- Pull before you push!
+
 ### Development standards
 Lorem ipsum
+
+#### Development environments
 
 
 ## Running the Package
