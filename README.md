@@ -42,5 +42,7 @@ lorem ipsum
 
 ## Resources
 
-- [example](example.com)
+### APIs
+- [Facebook API](https://developers.facebook.com/)
+- [Spotify API](https://developer.spotify.com/)
 
