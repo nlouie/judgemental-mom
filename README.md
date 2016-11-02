@@ -13,7 +13,8 @@
 
 ## Dependencies
 
-lorem ipsum
+Python 3.5
+Flask
 
 ## Setting up the Package
 
@@ -21,6 +22,28 @@ First, clone or fork our repository
 
 ```git clone https://github.com/nlouie/judgemental-mom.git```
 
+Create a new virtual environment for the Flask project. (optional) 
+
+I suggest using PyCharm and when setting the interpreter, create a new virtual environment
+
+#### Install flask
+
+```pip install flask```
+
+####  Install indico.io (text analysis)
+
+```pip install indicoio```
+
+
+## Running the Package
+
+####  Start the server 
+
+``` python app.py ```
+
+#### Load web page
+
+```http://localhost:5000```
 
 ## Development
 
@@ -28,21 +51,13 @@ First, clone or fork our repository
 Please follow proper git usage to avoid conflicts. 
 - Pull before you push!
 
-### Development standards
-Lorem ipsum
-
 #### Development environments
+- PyCharm
 
-
-## Running the Package
-
-lorem ipsum
-
-`run jm.example`
 
 ## Resources
 
 ### APIs
 - [Facebook API](https://developers.facebook.com/)
 - [Spotify API](https://developer.spotify.com/)
-
+- [Indico Docs](https://indico.io/docs)
