@@ -2,7 +2,7 @@
 ### [Boston University Department of Computer Science](http://www.bu.edu/cs/)
 #### [CS411 A2 Software Engineering](http://sites.bu.edu/perryd/cs411-software-engineering/)Fall 2016
 ##### Created by nlouie on 10/6/16
-##### Last updated by nlouie on 10/6/16
+##### Last updated by nlouie on 11/2/16
 ##### https://judgementalmom.com
 
 ### Group 8 Team Members
@@ -13,8 +13,18 @@
 
 ## Dependencies
 
-Python 3.5
-Flask
+### Backend
+- [Python 3.5](https://www.python.org/downloads/release/python-350/)
+- [Flask](http://flask.pocoo.org)
+
+### Database (with sqllite3)
+- [Dataset](https://dataset.readthedocs.io/en/latest/)
+
+### Front End
+- Angular? (not implemented yet)
+
+### External APIs
+- [Indico](https://indico.io)
 
 ## Setting up the Package
 
@@ -25,6 +35,8 @@ First, clone or fork our repository
 Create a new virtual environment for the Flask project. (optional) 
 
 I suggest using PyCharm and when setting the interpreter, create a new virtual environment
+
+### Installing Dependencies
 
 #### Install flask
 
@@ -37,21 +49,17 @@ I suggest using PyCharm and when setting the interpreter, create a new virtual e
 
 ## Running the Package
 
-####  Start the server 
+###  Start the server 
 
 ``` python app.py ```
 
-#### Load web page
+### Load web page
 
 ```http://localhost:5000```
 
 ## Development
 
-#### Development Notes as we move on
-Please follow proper git usage to avoid conflicts. 
-- Pull before you push!
-
-#### Development environments
+### Development environments
 - PyCharm
 
 
