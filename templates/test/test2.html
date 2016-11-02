@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<p>Spotify Call, Search for an artist!!</p>
+<form action="/test2" method="post">
+    <input name="artist" type="text"/>
+    <input type="submit" value = "submit">
+</form>
+
+<p>Your results</p>
+
+{% if response %}
+{{ response }}
+{% endif %}
+
+</body>
+</html>

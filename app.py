@@ -1,5 +1,7 @@
 from flask import Flask, request, render_template
-from test import test_me
+
+from test.test import test_me
+from test.test2 import test_me2
 
 app = Flask(__name__)
 
@@ -12,9 +14,19 @@ def test_call():
     if request.method == 'POST':
         response = request.form['input']
         d = test_me(response)
-        return render_template('test.html', response=d)
+        return render_template('test/test.html', response=d)
     else:
-        return render_template('test.html')
+        return render_template('test/test.html')
+
+@app.route('/test2', methods=['GET', 'POST'])
+def test_call2():
+    if request.method == 'POST':
+        input = request.form['artist']
+        r = test_me2(input)
+        return render_template('test/test2.html', response=r.text)
+    else:
+        return render_template('test/test2.html')
+
 
 if __name__ == '__main__':
     app.run()
