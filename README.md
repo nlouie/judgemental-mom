@@ -61,3 +61,7 @@ Please follow proper git usage to avoid conflicts.
 - [Facebook API](https://developers.facebook.com/)
 - [Spotify API](https://developer.spotify.com/)
 - [Indico Docs](https://indico.io/docs)
+
+### Flask
+- [Flask Docs](http://flask.pocoo.org/docs/)
+- [Jinja Templates](http://jinja.pocoo.org/docs/dev/templates/)
