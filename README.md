@@ -22,8 +22,8 @@
 
 ### Front End
 - [Bootstrap](http://getbootstrap.com/)
-- Angular? (not implemented yet)
-- [Sass?](http://sass-lang.com/libsass) (not implemented yet)
+- [Angular](https://angularjs.org/) (not implemented yet)
+- [Sass](http://sass-lang.com/libsass) (not implemented yet)
 
 ### External APIs
 - [Indico](https://indico.io)
