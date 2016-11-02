@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% block head %}
+    <link rel="stylesheet" href="../src/css/style.css" />
+    <title>{% block title %}{% endblock %} - Judgemental Mom</title>
+    {% endblock %}
+</head>
+<body>
+    <div id="content">{% block content %}{% endblock %}</div>
+    <div id="footer">
+        {% block footer %}
+        &copy; Copyright 2016 by <a href="https://judgementalmom.com">Judgemental Mom</a>.
+        {% endblock %}
+    </div>
+</body>
+</html>

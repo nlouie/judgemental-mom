@@ -1,13 +1,14 @@
 from flask import Flask, request, render_template
+import json
 
-from test.test import test_me
-from test.test2 import test_me2
+from src.test.test import test_me
+from src.test.test2 import test_me2
 
 app = Flask(__name__)
 
 @app.route('/')
 def hello_world():
-    return 'Hello World!'
+    return render_template('index.html')
 
 @app.route('/test', methods=['GET','POST'])
 def test_call():
@@ -30,3 +31,5 @@ def test_call2():
 
 if __name__ == '__main__':
     app.run()
+
+# eof

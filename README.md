@@ -21,6 +21,7 @@
 - [Dataset](https://dataset.readthedocs.io/en/latest/)
 
 ### Front End
+- [Bootstrap](http://getbootstrap.com/)
 - Angular? (not implemented yet)
 
 ### External APIs
@@ -60,8 +61,8 @@ I suggest using PyCharm and when setting the interpreter, create a new virtual e
 ## Development
 
 ### Development environments
-- PyCharm
-
+- Python 3.5
+- PyCharm Professional Edition
 
 ## Resources
 
@@ -73,3 +74,10 @@ I suggest using PyCharm and when setting the interpreter, create a new virtual e
 ### Flask
 - [Flask Docs](http://flask.pocoo.org/docs/)
 - [Jinja Templates](http://jinja.pocoo.org/docs/dev/templates/)
+
+### Dataset
+- [Dataset docs](https://dataset.readthedocs.io/en/latest/)
+
+### Jetbrains
+- [Pycharm](https://www.jetbrains.com/pycharm/)
+- [Jetbrains education](https://www.jetbrains.com/student/)
