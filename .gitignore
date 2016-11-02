@@ -90,3 +90,4 @@ fabric.properties
 results
 npm-debug.log
 public/libs
+auth.json
