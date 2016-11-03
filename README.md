@@ -44,7 +44,7 @@ I suggest using PyCharm and when setting the interpreter, create a new virtual e
 
 ### Installing Dependencies
 
-```pip install requirements.txt```
+```pip install -r requirements.txt```
 
 <!--#### Install flask-->
 
