@@ -64,7 +64,7 @@ def view_test2():
     if request.method == 'POST':
         input = request.form['artist']
         r = test_me2(input)
-        return render_template('test/test2.html', response=r.text)
+        return render_template('test/test2.html', response=r)
     else:
         return render_template('test/test2.html')
 
