@@ -11,6 +11,10 @@
 - [Derek Mei](mailto:dmei3010@bu.edu)
 - [Cameron Williams](mailto:camwill@bu.edu)
 
+### About
+Judgemental Mom is a social media analyzer where a user can connect his/her social media account(s), and get back a JM Report. 
+Our first trick is to analyze a user's Facebook data and suggest playlists to match their judged mood.
+
 ## Dependencies
 
 ### Backend
@@ -40,13 +44,15 @@ I suggest using PyCharm and when setting the interpreter, create a new virtual e
 
 ### Installing Dependencies
 
-#### Install flask
+```python setup.py build```
 
-```pip install flask```
+<!--#### Install flask-->
 
-####  Install indico.io (text analysis)
+<!--```pip install flask```-->
 
-```pip install indicoio```
+<!--####  Install indico.io (text analysis)-->
+
+<!--```pip install indicoio```-->
 
 
 ## Running the Package

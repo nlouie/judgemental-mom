@@ -34,7 +34,7 @@ def logout():
     pass
 
 # analyze
-@app.route('analyze')
+@app.route('/analyze')
 def view_analyze():
     return render_template('analyze.html')
 
@@ -43,8 +43,10 @@ def view_analyze():
 def view_connect():
     return render_template('connect.html')
 
-# Examples for assignment 3 or reference
+# Examples for assignment 3 or for reference
 
+
+# indico mood analysis
 
 @app.route('/test', methods=['GET', 'POST'])
 def view_test():
@@ -55,6 +57,7 @@ def view_test():
     else:
         return render_template('test/test.html')
 
+# spotify artist search
 
 @app.route('/test2', methods=['GET', 'POST'])
 def view_test2():
