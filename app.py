@@ -1,7 +1,7 @@
 # Judgemental Mom
 # CS411 A2 Group 8 Project
 # Created by nlouie on 11/1/16
-# Last updated by nlouie on 11/2/16
+# Last updated by coreycle on 11/4/16
 # Description: This is the main app script. Run me to start the server!
 
 # ------------------ Imports --------------------- #
@@ -9,20 +9,18 @@
 from flask import Flask, request, render_template, session, Response
 from functools import wraps
 
-from src.test.test import test_me
-from src.test.test2 import test_me2
+from config import load_json
+from tests.test import test_me
+from tests.test2 import test_me2
 import src.login
 
 # ----------------- Init ----------------------------#
 
 app = Flask(__name__)
 
-
-
-
 # ----------------- Basic Authentication ------------------------#
 
-# need a better authentication method..
+# need a better authentication method
 
 def check_auth(username, password):
     """This function is called to check if a username /
@@ -94,9 +92,10 @@ def view_connect():
 @app.route('/test', methods=['GET', 'POST'])
 def view_test():
     if request.method == 'POST':
+        api_key = load_json('api_keys')['indico']['api_key']
         response = request.form['input']
-        d = test_me(response)
-        return render_template('test/test.html', response=d)
+        emotion_dict = test_me(response, api_key)
+        return render_template('test/test.html', response=emotion_dict)
     else:
         return render_template('test/test.html')
 
@@ -105,14 +104,12 @@ def view_test():
 @app.route('/test2', methods=['GET', 'POST'])
 def view_test2():
     if request.method == 'POST':
-        input = request.form['artist']
-        r = test_me2(input)
-        return render_template('test/test2.html', response=r)
+        artist_query = request.form['artist']
+        response = test_me2(artist_query)
+        return render_template('test/test2.html', response=response)
     else:
         return render_template('test/test2.html')
 
 
 if __name__ == '__main__':
     app.run()
-
-# eof

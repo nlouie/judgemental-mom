@@ -7,16 +7,19 @@
 <body>
 
 <p>Emotion Analysis!!!!!!!!</p>
-<form method="post">
+<form action="/test" method="post">
     <input name="input" type="text"/>
     <input type="submit" value = "submit">
 </form>
 
-
 {% if response %}
-    <p>Your results</p>
-    {{ response }}
+<p>Your Results</p>
+{% for key, value in response.items() %}
+    <h2>Emotion: {{ key }}</h2>
+    <h3>Value: {{ value }}</h3>
+{% endfor %}
 {% endif %}
+
 
 </body>
 </html>
