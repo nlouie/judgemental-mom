@@ -4,13 +4,49 @@
 # Last updated by nlouie on 11/2/16
 # Description: This is the main app script. Run me to start the server!
 
-from flask import Flask, request, render_template
-import json
+# ------------------ Imports --------------------- #
+
+from flask import Flask, request, render_template, session, Response
+from functools import wraps
 
 from src.test.test import test_me
 from src.test.test2 import test_me2
+import src.login
+
+# ----------------- Init ----------------------------#
 
 app = Flask(__name__)
+
+
+
+
+# ----------------- Basic Authentication ------------------------#
+
+# need a better authentication method..
+
+def check_auth(username, password):
+    """This function is called to check if a username /
+    password combination is valid.
+    """
+    return username == 'admin' and password == 'secret'
+
+def authenticate():
+    """Sends a 401 response that enables basic auth"""
+    return Response(
+        'Could not verify your access level for that URL.\n'
+        'You have to login with proper credentials', 401,
+        {'WWW-Authenticate': 'Basic realm="Login Required"'})
+
+def requires_auth(f):
+    @wraps(f)
+    def decorated(*args, **kwargs):
+        auth = request.authorization
+        if not auth or not check_auth(auth.username, auth.password):
+            return authenticate()
+        return f(*args, **kwargs)
+    return decorated
+
+# ------------------ Routes --------------------------#
 
 # index
 @app.route('/')
@@ -32,6 +68,13 @@ def view_login():
 @app.route('/logout', methods=['POST'])
 def logout():
     pass
+
+# example of requiring authenticationg
+
+@app.route('/account')
+@requires_auth
+def secret_page():
+    return render_template('account.html')
 
 # analyze
 @app.route('/analyze')
