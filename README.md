@@ -96,7 +96,7 @@ I suggest using PyCharm and when setting the interpreter, create a new virtual e
 
 ### Required functionality
 
-[ ] Setup database with dataset (sqllite3)
+ -[x] Setup database with dataset (sqllite3)
 
 [ ] Login / logout functionality (research packages for Flask)
 
