@@ -89,7 +89,7 @@ def view_login():
 
 
 @app.route('/login/<provider_name>/', methods=['GET', 'POST'])
-def login(provider_name):
+def login_oauth(provider_name):
     """
     Login handler, must accept both GET and POST to be able to use OpenID.
     """
