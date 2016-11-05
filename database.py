@@ -33,7 +33,8 @@ def create_account(email, hashed_password):
         return True, 'success'
     except:
         return False, 'email exists'
-    
+
+
 def login(email, hashed_password):
     db_exists()
     db = dataset.connect(DB_URL)
@@ -41,7 +42,7 @@ def login(email, hashed_password):
     result = tb.find_one(email=email)
     if result == None:
         return False, 'invalid email'
-    elif result['password'] != hased_password:
+    elif result['password'] is not hashed_password:
         return False, 'invalid password'
     else:
         return True, 'success'
