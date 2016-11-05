@@ -4,29 +4,32 @@ import os
 DB_URL = 'sqlite:///data/users.db'
 
 CREATE_TABLE = \
-'''
-CREATE TABLE users
-(
-email VARCHAR(255) NOT NULL, 
-password VARCHAR(255) NOT NULL,
-PRIMARY KEY (email)
-)
-'''
+    '''
+    CREATE TABLE users
+    (
+    email VARCHAR(255) NOT NULL,
+    password VARCHAR(255) NOT NULL,
+    PRIMARY KEY (email)
+    )
+    '''
+
 
 def make_new_db():
     db = dataset.connect(DB_URL)
-    tb = db['postings']
+    tb = db['users']
     tb.drop()
     db.query(CREATE_TABLE)
-    
+
+
 def db_exists():
     if not os.path.isfile(DB_URL.split('///')[1]):
         make_new_db()
-        
+
+
 def create_account(email, hashed_password):
     db_exists()
     db = dataset.connect(DB_URL)
-    tb = db['postings']
+    tb = db['users']
     try:
         tb.insert(dict(email=email,
                        password=hashed_password))
@@ -38,9 +41,9 @@ def create_account(email, hashed_password):
 def login(email, hashed_password):
     db_exists()
     db = dataset.connect(DB_URL)
-    tb = db['postings']
+    tb = db['users']
     result = tb.find_one(email=email)
-    if result == None:
+    if result is None:
         return False, 'invalid email'
     elif result['password'] is not hashed_password:
         return False, 'invalid password'
