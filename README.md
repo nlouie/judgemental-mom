@@ -64,8 +64,7 @@ I suggest using PyCharm and when setting the interpreter, create a new virtual e
 
 ### Load web page
 
-```http://localhost:5000```
-
+``` http://localhost:5000 ```
 
 ## Development
 
