@@ -20,7 +20,7 @@ Our first trick is to analyze a user's Facebook data and suggest playlists to ma
 ### Backend
 - [Python 3.5](https://www.python.org/downloads/release/python-350/)
 - [Flask](http://flask.pocoo.org)
-- [Flask OAuth](https://pythonhosted.org/Flask-OAuth/)
+- [Authomatic](http://peterhudec.github.io/authomatic/index.html)
 
 ### Database (with sqllite3)
 - [Dataset](https://dataset.readthedocs.io/en/latest/)
@@ -82,7 +82,7 @@ I suggest using PyCharm and when setting the interpreter, create a new virtual e
 ### Flask
 - [Flask Docs](http://flask.pocoo.org/docs/)
 - [Jinja Templates](http://jinja.pocoo.org/docs/dev/templates/)
-- http://peterhudec.github.io/authomatic/examples/flask-simple.html
+- [Authomatic Flask](http://peterhudec.github.io/authomatic/examples/flask-simple.html)
 
 ### Dataset
 - [Dataset docs](https://dataset.readthedocs.io/en/latest/)
