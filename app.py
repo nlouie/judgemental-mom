@@ -6,19 +6,21 @@
 
 # ------------------ Imports --------------------- #
 
-from flask import Flask, request, render_template, Response, session, redirect, json, make_response
+
+from flask import Flask, request, render_template, Response, make_response
+from config import load_json
+
+# for testing
+from test import test_me
+from test2 import test_me2
+
+from auth_config import CONFIG     # for authomatic
+from authomatic import Authomatic
+from authomatic.adapters import WerkzeugAdapter
+
 from functools import wraps     # for basic auth
 
-
-from config import load_json
-from tests.test import test_me
-from tests.test2 import test_me2
-import src.login
-
-
-from authomatic.adapters import WerkzeugAdapter
-from authomatic import Authomatic
-from config import CONFIG
+from src import *
 
 # ----------------- Init ----------------------------#
 
@@ -58,12 +60,6 @@ def requires_auth(f):
     return decorated
 
 # -------------------- FUNCTIONS ----------------------------#
-
-
-
-
-
-
 
 
 
@@ -153,7 +149,7 @@ def view_connect():
 @app.route('/test', methods=['GET', 'POST'])
 def view_test():
     if request.method == 'POST':
-        api_key = load_json('api_keys')['indico']['api_key']
+        api_key = load_json()['indico']['api_key']
         response = request.form['input']
         emotion_dict = test_me(response, api_key)
         return render_template('test/test.html', response=emotion_dict)
@@ -171,7 +167,6 @@ def view_test2():
         return render_template('test/test2.html', response=response)
     else:
         return render_template('test/test2.html')
-
 
 
 if __name__ == '__main__':

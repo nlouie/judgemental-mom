@@ -48,7 +48,6 @@ crashlytics.properties
 crashlytics-build.properties
 fabric.properties
 
-
 *.csv
 auth.json
 *.json
@@ -144,11 +143,10 @@ ENV/
 # Rope project settings
 .ropeproject
 
-config.py
-
+auth_config.py
 
 src/__init__.py
 
-tests/__init__.py
-
 *.db
+
+__init__.py
