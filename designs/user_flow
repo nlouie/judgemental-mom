@@ -1,0 +1,43 @@
+User Flow Through Judgmental Mom
+
+1) Landing Page
+	-sign in option
+		-for users who already have an account
+	-sign up option
+		-for new users who need to create a judgemental mom account
+
+Sign In Work Flow
+1) Log in using username and password
+2) User might need to continue setting up their account
+	-connect social media account
+		-either Facebook or Twitter
+	-verify email (?)
+3) Dashboard Page with Previous Analysis
+4) Option to Analyze Own Posts, Information, and Data
+5) Option to Analyze Friends' Posts, Information, and Data
+
+Sign Up Work Flow
+1) Create an account
+	-first name
+	-last name
+	-email address
+	-age
+	-option to sign up using Facebook
+	-what other fields to include?
+2)  User needs to set up their account
+	-connect social media account
+		-either Facebook or Twitter
+	-verify email (?)
+3) Dashboard Page with Previous Analyses
+4) Option to Analyze Own Posts, Information, and Data
+5) Option to Analyze Friends' Posts, Information, and Data
+
+
+Dashboard Page
+1) Ability to Analyze a Friend
+2) View Previous Analyses
+3) Ability to Analyze Own Information
+4) Settings
+	-delete account
+	-change profile
+	-change password

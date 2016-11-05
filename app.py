@@ -1,7 +1,7 @@
 # Judgemental Mom
 # CS411 A2 Group 8 Project
 # Created by nlouie on 11/1/16
-# Last updated by nlouie on 11/2/16
+# Last updated by nlouie on 11/5/16
 # Description: This is the main app script. Run me to start the server!
 
 # ------------------ Imports --------------------- #
@@ -10,8 +10,10 @@ from flask import Flask, request, render_template, Response, session, redirect, 
 from functools import wraps     # for basic auth
 
 
-from src.test.test import test_me
-from src.test.test2 import test_me2
+from config import load_json
+from tests.test import test_me
+from tests.test2 import test_me2
+import src.login
 
 
 from authomatic.adapters import WerkzeugAdapter
@@ -28,7 +30,7 @@ authomatic = Authomatic(CONFIG, 'your secret string', report_errors=False)
 
 # ----------------- Basic Authentication ------------------------#
 
-# need a better authentication method..
+# need a better authentication method
 
 
 def check_auth(username, password):
@@ -151,9 +153,10 @@ def view_connect():
 @app.route('/test', methods=['GET', 'POST'])
 def view_test():
     if request.method == 'POST':
+        api_key = load_json('api_keys')['indico']['api_key']
         response = request.form['input']
-        d = test_me(response)
-        return render_template('test/test.html', response=d)
+        emotion_dict = test_me(response, api_key)
+        return render_template('test/test.html', response=emotion_dict)
     else:
         return render_template('test/test.html')
 
@@ -163,9 +166,9 @@ def view_test():
 @app.route('/test2', methods=['GET', 'POST'])
 def view_test2():
     if request.method == 'POST':
-        input = request.form['artist']
-        r = test_me2(input)
-        return render_template('test/test2.html', response=r)
+        artist_query = request.form['artist']
+        response = test_me2(artist_query)
+        return render_template('test/test2.html', response=response)
     else:
         return render_template('test/test2.html')
 
