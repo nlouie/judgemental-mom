@@ -96,15 +96,14 @@ I suggest using PyCharm and when setting the interpreter, create a new virtual e
 
 ### Required functionality
 
-[ ] - Setup database with dataset (sqllite3)
-[ ] - Login / logout functionality (research packages for Flask)
-[ ] - Connect social Media with `connect.py` and `connect.html`
-    [ ] Facebook
-[ ] - Gather facebook data with `collect_facebook_.py`
-[ ] - Analyze and display facebook data with `analyze.py` and `analyze.html` using Indico
-[ ] - Make the UI look pretty
+- [ ] Setup database with dataset (sqllite3)
+- [ ] Login / logout functionality (research packages for Flask)
+- [ ] Connect social Media with `connect.py` and `connect.html`
+- [ ] Gather facebook data with `collect_facebook_.py`
+- [ ] Analyze and display facebook data with `analyze.py` and `analyze.html` using Indico
+- [ ] Make the UI look pretty
 
 ### Optional functionality
-[ ] - Login with Facebook
-[ ] - Connect your Spotify
+- [ ] Login with Facebook
+- [ ] Connect your Spotify
 
