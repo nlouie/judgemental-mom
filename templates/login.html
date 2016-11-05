@@ -13,16 +13,24 @@
     </p>
 
     <div class="container col-md-5 col-md-offset-4">
-        <div class="input-group">
-            <p>Username: <input class="form-control" name="username" type="text" title="username" placeholder="username"></p>
-            <p>Password: <input class="form-control" name="password" type="password" title="password" placeholder="password"></p>
-            <br>
-            <p>
-                <span class="input-group-btn">
-                <button class="btn btn-default" type="button">Login</button>
+        <div class="input-group container">
+            Username: <input class="form-control" name="username" type="text" title="username" placeholder="username">
+            Password: <input class="form-control" name="password" type="password" title="password" placeholder="password">
+            <span class="input-group-btn">
+            <button class="btn btn-default" type="button">Login</button>
             </span>
+        </div>
+
+        <div class="container">
+            <p>
+                <!--Links to the login handler-->
+                Login with <a href="login/fb">Facebook</a>.<br />
+                Login with <a href="login/tw">Twitter</a>.<br />
             </p>
 
+
+
         </div>
+
     </div>
 {% endblock %}

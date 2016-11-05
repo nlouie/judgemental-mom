@@ -6,15 +6,24 @@
 
 # ------------------ Imports --------------------- #
 
-from flask import Flask, request, render_template, Response
-from functools import wraps
+from flask import Flask, request, render_template, Response, session, redirect, json, make_response
+from functools import wraps     # for basic auth
+
 
 from src.test.test import test_me
 from src.test.test2 import test_me2
+
+
+from authomatic.adapters import WerkzeugAdapter
+from authomatic import Authomatic
+from config import CONFIG
+
 # ----------------- Init ----------------------------#
 
-
 app = Flask(__name__)
+
+# Instantiate Authomatic.
+authomatic = Authomatic(CONFIG, 'your secret string', report_errors=False)
 
 
 # ----------------- Basic Authentication ------------------------#
@@ -46,6 +55,18 @@ def requires_auth(f):
         return f(*args, **kwargs)
     return decorated
 
+# -------------------- FUNCTIONS ----------------------------#
+
+
+
+
+
+
+
+
+
+
+
 # ------------------ Routes --------------------------#
 
 # index
@@ -67,6 +88,31 @@ def view_login():
         return render_template('login.html', username=username, password=password)
     else:
         return render_template('login.html')
+
+
+@app.route('/login/<provider_name>/', methods=['GET', 'POST'])
+def login(provider_name):
+    """
+    Login handler, must accept both GET and POST to be able to use OpenID.
+    """
+
+    # We need response object for the WerkzeugAdapter.
+    response = make_response()
+
+    # Log the user in, pass it the adapter and the provider name.
+    result = authomatic.login(WerkzeugAdapter(request, response), provider_name)
+
+    # If there is no LoginResult object, the login procedure is still pending.
+    if result:
+        if result.user:
+            # We need to update the user to get more info.
+            result.user.update()
+
+        # The rest happens inside the template.
+        return render_template('login.html', result=result)
+
+    # Don't forget to return the response.
+    return response
 
 # logout
 
@@ -124,7 +170,8 @@ def view_test2():
         return render_template('test/test2.html')
 
 
+
 if __name__ == '__main__':
-    app.run()
+    app.run(debug=True, port=5000)
 
 # eof

@@ -20,6 +20,7 @@ Our first trick is to analyze a user's Facebook data and suggest playlists to ma
 ### Backend
 - [Python 3.5](https://www.python.org/downloads/release/python-350/)
 - [Flask](http://flask.pocoo.org)
+- [Flask OAuth](https://pythonhosted.org/Flask-OAuth/)
 
 ### Database (with sqllite3)
 - [Dataset](https://dataset.readthedocs.io/en/latest/)
@@ -46,20 +47,19 @@ I suggest using PyCharm and when setting the interpreter, create a new virtual e
 
 ```pip install -r requirements.txt```
 
-<!--#### Install flask-->
+*OR*
 
-<!--```pip install flask```-->
 
-<!--####  Install indico.io (text analysis)-->
-
-<!--```pip install indicoio```-->
+```$ pip install flask```
+```$ pip install indicoio```
+```$ pip install Flask-OAuth```
 
 
 ## Running the Package
 
 ###  Start the server 
 
-``` python app.py ```
+```$ python app.py ```
 
 ### Load web page
 
@@ -81,6 +81,7 @@ I suggest using PyCharm and when setting the interpreter, create a new virtual e
 ### Flask
 - [Flask Docs](http://flask.pocoo.org/docs/)
 - [Jinja Templates](http://jinja.pocoo.org/docs/dev/templates/)
+- http://peterhudec.github.io/authomatic/examples/flask-simple.html
 
 ### Dataset
 - [Dataset docs](https://dataset.readthedocs.io/en/latest/)
