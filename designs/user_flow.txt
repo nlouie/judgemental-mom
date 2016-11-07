@@ -21,7 +21,7 @@ Sign Up Work Flow
 	-first name
 	-last name
 	-email address
-	-age
+	-age                # is this necessary? - NL
 	-option to sign up using Facebook
 	-what other fields to include?
 2)  User needs to set up their account

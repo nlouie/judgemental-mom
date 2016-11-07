@@ -13,19 +13,66 @@
     </p>
 
     <div class="container col-md-5 col-md-offset-4">
-        <div class="input-group container">
-            Username: <input class="form-control" name="username" type="text" title="username" placeholder="username">
-            Password: <input class="form-control" name="password" type="password" title="password" placeholder="password">
-            <span class="input-group-btn">
-            <button class="btn btn-default" type="button">Login</button>
-            </span>
-        </div>
+{#        <div class="input-group container">#}
+{#            Username: <input class="form-control" name="username" type="text" title="username" placeholder="username">#}
+{#            Password: <input class="form-control" name="password" type="password" title="password" placeholder="password">#}
+{#            <span class="input-group-btn">#}
+{#            <button class="btn btn-default" type="button">Login</button>#}
+{#            </span>#}
+{#        </div>#}
+
+
+        {# Check for errors. #}
+    {% if result.error %}
+        <h2>Damn that error: {{ result.error.message }}</h2>
+    {% endif %}
+
+    {# Welcome the user. #}
+    {% if result.user %}
+        <h1>Hi {{ result.user.name }}</h1>
+        <h2>Your id is: {{ result.user.id }}</h2>
+        <h2>Your email is: {{ result.user.email }}</h2>
+    {% endif %}
+
+        {# If the user has credentials, we can access his/her protected resources. #}
+    {% if result.user.credentials %}
+
+        {# Let's get the user's 5 most recent statuses. #}
+        {% if result.provider.name == 'fb' %}
+            Your are logged in with Facebook.<br />
+
+            {# Insert the user's ID to the URL and access the resource. #}
+            {% set url = 'https://graph.facebook.com/{0}?fields=feed.limit(5)'.format(result.user.id) %}
+            {% set response = result.provider.access(url) %}
+
+            {# Parse the response. #}
+            {% if response.status == 200 %}
+
+                {% if response.data.error %}
+                    Damn that error: {{ response.data.error }}!
+                {% endif %}
+
+                {% if response.data.feed.data %}
+                    Your 5 most recent statuses:<br />
+
+                    {% for status in response.data.feed.data %}
+                        <h3>{{ status.message or status.name or status.story }}</h3>
+                        Posted on: {{ status.created_time }}
+                    {% endfor %}
+                {% endif %}
+
+            {% endif %}{# response.status == 200 #}
+
+        {% endif %}{# result.provider.name == 'fb' #}
+
+    {% endif %}{# result.user.credentials #}
+
 
         <div class="container">
             <p>
                 <!--Links to the login handler-->
-                Login with <a href="login/fb">Facebook</a>.<br />
-                Login with <a href="login/tw">Twitter</a>.<br />
+                Login with <a href="login/fb">Facebook</a>.<br/>
+{#                Login with <a href="login/tw">Twitter</a>.<br/>#}
             </p>
 
 

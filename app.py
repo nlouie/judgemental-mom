@@ -7,7 +7,7 @@
 # ------------------ Imports --------------------- #
 
 
-from flask import Flask, request, render_template, Response, make_response
+from flask import Flask, request, render_template, Response, make_response, session
 from config import load_json
 
 # for testing
@@ -28,7 +28,6 @@ app = Flask(__name__)
 
 # Instantiate Authomatic.
 authomatic = Authomatic(CONFIG, 'your secret string', report_errors=False)
-
 
 # ----------------- Basic Authentication ------------------------#
 
@@ -74,8 +73,7 @@ def requires_auth(f):
 def hello_world():
     return render_template('index.html')
 
-# login
-
+# facebook login with authomatic
 
 @app.route('/login', methods=['GET','POST'])
 def view_login():
@@ -98,7 +96,8 @@ def login_oauth(provider_name):
     response = make_response()
 
     # Log the user in, pass it the adapter and the provider name.
-    result = authomatic.login(WerkzeugAdapter(request, response), provider_name)
+    result = authomatic.login(WerkzeugAdapter(request, response), provider_name, session=session,
+        session_saver=lambda: app.save_session(session, response))
 
     # If there is no LoginResult object, the login procedure is still pending.
     if result:
@@ -170,6 +169,7 @@ def view_test2():
 
 
 if __name__ == '__main__':
+    app.secret_key = 'super secret key'
     app.run(debug=True, port=5000)
 
 # eof
