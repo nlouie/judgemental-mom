@@ -1,4 +1,14 @@
+# test.py
+# Judgemental Mom
+# CS411 A2 Group 8 Project
+# Created by nlouie on 11/1/16
+# Last updated by nlouie on 11/6/16
+# Description:
+
+# ------------------ Imports --------------------- #
 import indicoio
+
+# ------------------ Functions --------------------- #
 
 
 def test_me(s, api_key):
@@ -12,3 +22,5 @@ def test_me(s, api_key):
     indicoio.config.api_key = api_key
     response = indicoio.emotion(s)
     return response
+
+# eof

@@ -1,5 +1,15 @@
+# test2.py
+# Judgemental Mom
+# CS411 A2 Group 8 Project
+# Created by nlouie on 11/1/16
+# Last updated by nlouie on 11/6/16
+# Description:
+
+# ------------------ Imports --------------------- #
+
 import requests
 
+# ------------------ Function --------------------- #
 
 def test_me2(artist):
 
@@ -20,3 +30,5 @@ def test_me2(artist):
     artists = r_dict['artists']['items']
 
     return artists
+
+# eof

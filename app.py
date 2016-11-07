@@ -1,7 +1,8 @@
+# app.py
 # Judgemental Mom
 # CS411 A2 Group 8 Project
 # Created by nlouie on 11/1/16
-# Last updated by nlouie on 11/5/16
+# Last updated by nlouie on 11/6/16
 # Description: This is the main app script. Run me to start the server!
 
 # ------------------ Imports --------------------- #
@@ -16,6 +17,7 @@ from test2 import test_me2
 
 from auth_config import CONFIG     # for authomatic
 from authomatic import Authomatic
+# http://peterhudec.github.io/authomatic/reference/adapters.html#authomatic.adapters.WerkzeugAdapter
 from authomatic.adapters import WerkzeugAdapter
 
 from functools import wraps     # for basic auth
@@ -169,6 +171,7 @@ def view_test2():
 
 
 if __name__ == '__main__':
+    # http://flask.pocoo.org/docs/0.11/config/
     app.secret_key = 'super secret key'
     app.run(debug=True, port=5000)
 
