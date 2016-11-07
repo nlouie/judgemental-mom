@@ -75,15 +75,15 @@ def hello_world():
 
 # facebook login with authomatic
 
-@app.route('/login', methods=['GET','POST'])
-def view_login():
-    if request.method == 'POST':
-        username = request.form['username']
-        # plz do this better with hashes, this is just an example
-        password = request.form['password']
-        return render_template('login.html', username=username, password=password)
-    else:
-        return render_template('login.html')
+# @app.route('/login', methods=['GET','POST'])
+# def view_login():
+#     if request.method == 'POST':
+#         username = request.form['username']
+#         # plz do this better with hashes, this is just an example
+#         password = request.form['password']
+#         return render_template('login.html', username=username, password=password)
+#     else:
+#         return render_template('login.html')
 
 
 @app.route('/login/<provider_name>/', methods=['GET', 'POST'])
