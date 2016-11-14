@@ -143,10 +143,6 @@ ENV/
 # Rope project settings
 .ropeproject
 
-auth_config.py
-
-src/__init__.py
-
 *.db
 
 __init__.py
