@@ -92,6 +92,7 @@ def hello_world():
 def login_oauth(provider_name):
     """
     Login handler, must accept both GET and POST to be able to use OpenID.
+    We currently only accept facebook logins
     """
 
     # We need response object for the WerkzeugAdapter.
