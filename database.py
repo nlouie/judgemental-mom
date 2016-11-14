@@ -58,3 +58,6 @@ def login(email, hashed_password):
         return False, 'invalid password'
     else:
         return True, 'success'
+
+# eof
+
