@@ -12,7 +12,7 @@ import json
 # ------------------ Functions --------------------- #
 
 
-def load_json():
+def load_auth_json():
     data = json.load(open('auth.json', 'r'))
     return data
 

@@ -1,5 +1,5 @@
 from authomatic.providers import oauth2, oauth1
-from config import load_json
+from config import load_auth_json
 
 CONFIG = {
     'fb': {
@@ -7,8 +7,8 @@ CONFIG = {
         'class_': oauth2.Facebook,
 
         # Facebook is an AuthorizationProvider too.
-        'consumer_key': load_json()['facebook']['app_id'],
-        'consumer_secret': load_json()['facebook']['app_secret'],
+        'consumer_key': load_auth_json()['facebook']['app_id'],
+        'consumer_secret': load_auth_json()['facebook']['app_secret'],
 
         # But it is also an OAuth 2.0 provider and it needs scope.
         'scope': ['user_about_me', 'email', 'user_posts, user_likes']

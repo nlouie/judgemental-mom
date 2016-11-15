@@ -144,5 +144,3 @@ ENV/
 .ropeproject
 
 *.db
-
-__init__.py

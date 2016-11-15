@@ -7,31 +7,22 @@
 
 # ------------------ Imports --------------------- #
 
-
 from flask import Flask, request, render_template, Response, make_response, session
-from config import load_json
+from config import load_auth_json
+
+from authomatic import Authomatic
+# http://peterhudec.github.io/authomatic/reference/adapters.html#authomatic.adapters.WerkzeugAdapter
+from authomatic.adapters import WerkzeugAdapter
+
 
 # for testing
 from test import test_me
 from test2 import test_me2
 
-from auth_config import CONFIG     # for authomatic
-from authomatic import Authomatic
-# http://peterhudec.github.io/authomatic/reference/adapters.html#authomatic.adapters.WerkzeugAdapter
-from authomatic.adapters import WerkzeugAdapter
 
 from src import *
 
-# ----------------- Init ----------------------------#
-
-app = Flask(__name__)
-
-# Instantiate Authomatic.
-authomatic = Authomatic(CONFIG, 'your secret string', report_errors=False)
-
-
-# -------------------- FUNCTIONS ----------------------------#
-
+from . import app, authomatic
 
 # ------------------ Routes --------------------------#
 
@@ -56,7 +47,7 @@ def login_oauth(provider_name):
 
     # Log the user in, pass it the adapter and the provider name.
     result = authomatic.login(WerkzeugAdapter(request, response), provider_name, session=session,
-        session_saver=lambda: app.save_session(session, response))
+                              session_saver=lambda: app.save_session(session, response))
 
     # If there is no LoginResult object, the login procedure is still pending.
     if result:
@@ -100,7 +91,7 @@ def view_connect():
 @app.route('/test', methods=['GET', 'POST'])
 def view_test():
     if request.method == 'POST':
-        api_key = load_json()['indico']['api_key']
+        api_key = load_auth_json()['indico']['api_key']
         response = request.form['input']
         emotion_dict = test_me(response, api_key)
         return render_template('test/test.html', response=emotion_dict)
@@ -118,11 +109,3 @@ def view_test2():
         return render_template('test/test2.html', response=response)
     else:
         return render_template('test/test2.html')
-
-
-if __name__ == '__main__':
-    # http://flask.pocoo.org/docs/0.11/config/
-    app.secret_key = 'super secret key'
-    app.run(debug=True, port=5000)
-
-# eof
