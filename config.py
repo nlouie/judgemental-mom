@@ -16,4 +16,3 @@ def load_auth_json():
     data = json.load(open('auth.json', 'r'))
     return data
 
-
