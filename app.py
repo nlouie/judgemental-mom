@@ -11,15 +11,20 @@
 from flask import Flask, request, render_template, Response, make_response, session
 from config import load_auth_json
 
-# for testing
-from test import test_me
-from test2 import test_me2
-
 from auth_config import CONFIG     # for authomatic
 from authomatic import Authomatic
 from authomatic.adapters import WerkzeugAdapter
 
-from src import *
+
+# JM scripts
+
+from src.analyze import analyze
+from src.register import register
+
+# for testing
+from test import test_me
+from test2 import test_me2
+
 
 # ----------------- Init ----------------------------#
 
@@ -33,9 +38,6 @@ app.config['DEBUG'] = True
 
 # Instantiate Authomatic.
 authomatic = Authomatic(CONFIG, 'your secret string', report_errors=False)
-
-
-# -------------------- FUNCTIONS ----------------------------#
 
 
 # ------------------ Routes --------------------------#
@@ -70,6 +72,10 @@ def login_oauth(provider_name):
             result.user.update()
 
         # The rest happens inside the template.
+
+        # register(result)
+        analyze(result)
+
         return render_template('login.html', result=result)
 
     # Don't forget to return the response.

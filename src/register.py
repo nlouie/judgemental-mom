@@ -1,2 +1,2 @@
-def register(username, password):
+def register(result):
     pass

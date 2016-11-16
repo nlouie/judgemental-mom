@@ -2,7 +2,7 @@
 ### [Boston University Department of Computer Science](http://www.bu.edu/cs/)
 #### [CS411 A2 Software Engineering](http://sites.bu.edu/perryd/cs411-software-engineering/)Fall 2016
 ##### Created by nlouie on 10/6/16
-##### Last updated by nlouie on 11/5/16
+##### Last updated by nlouie on 11/16/16
 ##### https://judgementalmom.com
 
 ### Group 8 Team Members
@@ -14,6 +14,13 @@
 ### About
 Judgemental Mom is a social media analyzer where a user can connect his/her social media account(s), and get back a JM Report. 
 Our first trick is to analyze a user's Facebook data and suggest playlists to match their judged mood.
+
+
+## Development
+
+### Development environments
+- Python 3.5
+- PyCharm Professional Edition
 
 ## Dependencies
 
@@ -66,16 +73,13 @@ I suggest using PyCharm and when setting the interpreter, create a new virtual e
 
 ``` http://localhost:5000 ```
 
-## Development
-
-### Development environments
-- Python 3.5
-- PyCharm Professional Edition
 
 ## Resources
 
 ### APIs
 - [Facebook API](https://developers.facebook.com/)
+    - [Graph API](https://developers.facebook.com/docs/graph-api/)
+    - [API Explorer - Super useful!](https://developers.facebook.com/tools/explorer/)
 - [Spotify API](https://developer.spotify.com/)
 - [Indico Docs](https://indico.io/docs)
 
