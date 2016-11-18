@@ -10,12 +10,11 @@ def extract_facebook(result):
     # fields
     name = result.user.name             # save this in db
     oauth_id = result.user.id           # save this in db (note this is unique to our app key)
-    email = ""                          # save this in db
 
     # -- Never store personal information below in db --- #
 
     output = {'name': name,
-              'email': email,
+              'email': "",
               'oauth_id': oauth_id,
               'about': "",
               'religion': "",

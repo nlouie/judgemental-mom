@@ -32,7 +32,7 @@ from test2 import test_me2
 
 # initialize flask
 app = Flask(__name__)
-app.secret_key = 'sdaflkjsdlfksdlkfjsdlkfjlsdjflk32=4093284935u43oinkf'
+app.secret_key = load_auth_json()['flask']['secret_key']
 app.config['SESSION_TYPE'] = 'filesystem'
 app.config['DEBUG'] = True
 
@@ -78,6 +78,11 @@ def login_oauth(provider_name):
         if result.user:
             # We need to update the user to get more info.
             result.user.update()
+
+        # first, check if user exists already
+        # if not, register the user with result.id
+        # else, welcome the user
+        # finally, extract info
 
         extract_facebook(result)
 
