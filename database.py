@@ -2,62 +2,29 @@
 # Judgemental Mom
 # CS411 A2 Group 8 Project
 # Created by corey on 11/5/16
-# Last updated by nlouie on 11/6/16
+# Last updated by corey on 11/17/16
 # Description:
 
 # ------------------ Imports --------------------- #
 
 import dataset
-import os
+from config import load_auth_json
 
-DB_URL = 'sqlite:///data/users.db'
+PARAMS = load_auth_json()
 
-CREATE_TABLE = \
-    '''
-    CREATE TABLE users
-    (
-    email VARCHAR(255) NOT NULL,
-    password VARCHAR(255) NOT NULL,
-    PRIMARY KEY (email)
-    )
-    '''
+def get_db():
+    db = dataset.connect(PARAMS['database']['url'])
+    db.query(PARAMS['database']['table_schema'])
+    return db
 
-
-def make_new_db():
-    db = dataset.connect(DB_URL)
-    tb = db['users']
-    tb.drop()
-    db.query(CREATE_TABLE)
-
-
-def db_exists():
-    if not os.path.isfile(DB_URL.split('///')[1]):
-        make_new_db()
-
-
-def create_account(email, hashed_password):
-    db_exists()
-    db = dataset.connect(DB_URL)
-    tb = db['users']
+def create_account(fb_name, fb_email, fb_oauth_token):
+    db = get_db()
+    tb = db[PARAMS['database']['table']]
     try:
-        tb.insert(dict(email=email,
-                       password=hashed_password))
-        return True, 'success'
-    except:
-        return False, 'email exists'
-
-
-def login(email, hashed_password):
-    db_exists()
-    db = dataset.connect(DB_URL)
-    tb = db['users']
-    result = tb.find_one(email=email)
-    if result is None:
-        return False, 'invalid email'
-    elif result['password'] is not hashed_password:
-        return False, 'invalid password'
-    else:
-        return True, 'success'
-
-# eof
-
+        tb.insert(dict(fb_name=fb_name,
+                       fb_email=fb_email,
+                       fb_oauth_token=fb_oauth_token))
+        return True
+    except Exception as e:
+        #print(e)
+        return False
