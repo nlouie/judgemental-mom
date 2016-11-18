@@ -88,6 +88,7 @@ I suggest using PyCharm and when setting the interpreter, create a new virtual e
 - [Jinja Templates](http://jinja.pocoo.org/docs/dev/templates/)
 - [Authomatic Flask](http://peterhudec.github.io/authomatic/examples/flask-simple.html)
 - [WTF Forms](http://flask.pocoo.org/docs/0.11/patterns/wtforms/)
+- [Sessions](http://code.runnable.com/Uhf58hcCo9RSAACs/using-sessions-in-flask-for-python)
 
 ### Dataset
 - [Dataset docs](https://dataset.readthedocs.io/en/latest/)

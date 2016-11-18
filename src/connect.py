@@ -1,5 +1,5 @@
 # connect.py
-def connect_facebook(result):
+def extract_facebook(result):
     """
 
     :param result: The Facebook oAuth result
