@@ -79,6 +79,7 @@ def login_oauth(provider_name):
             # We need to update the user to get more info.
             result.user.update()
 
+<<<<<<< Updated upstream
         # first, check if user exists already
         # if not, register the user with result.id
         # else, welcome the user
@@ -86,6 +87,10 @@ def login_oauth(provider_name):
 
         output = extract_facebook(result)
 
+=======
+        output = extract_facebook(result)
+
+>>>>>>> Stashed changes
         return render_template('login.html', result=result, output=output)
 
     # Don't forget to return the response.
