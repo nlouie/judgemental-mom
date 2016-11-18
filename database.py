@@ -23,8 +23,7 @@ TABLE_SCHEMA = \
         fb_name VARCHAR(255) NOT NULL,
         fb_email VARCHAR(255) NOT NULL UNIQUE,
         fb_oauth_token VARCHAR(255) NOT NULL UNIQUE,
-        fb_app_token VARCHAR(255),
-        fb_app_token_fresh INTEGER DEFAULT 0
+        fb_app_token VARCHAR(255)
     )
     '''
 
@@ -76,12 +75,12 @@ def add_app_token(fb_oauth_token, fb_app_token):
     except Exception as e:
         return False
 
-# depreciate this.
-
-def is_app_token_valid(fb_oauth_token):
-    db = get_db()
-    tb = db[TABLE_NAME]
-    try:
-        return bool(tb.find_one(fb_oauth_token=fb_oauth_token)['fb_app_token_fresh'])
-    except Exception as e:
-        print(e)
+# # depreciate this.
+#
+# def is_app_token_valid(fb_oauth_token):
+#     db = get_db()
+#     tb = db[TABLE_NAME]
+#     try:
+#         return bool(tb.find_one(fb_oauth_token=fb_oauth_token)['fb_app_token_fresh'])
+#     except Exception as e:
+#         print(e)
