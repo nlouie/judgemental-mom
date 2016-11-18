@@ -5,6 +5,7 @@ CONFIG = {
     'fb': {
 
         'class_': oauth2.Facebook,
+        'id': 1,
 
         # Facebook is an AuthorizationProvider too.
         'consumer_key': load_auth_json()['facebook']['app_id'],

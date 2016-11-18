@@ -20,7 +20,7 @@ from authomatic.adapters import WerkzeugAdapter
 # JM scripts
 
 from src.analyze import analyze, extract_facebook
-from src.register import register
+from src.register import db_user
 
 # for testing
 from test import test_me
@@ -37,16 +37,14 @@ app = Flask(__name__)
 app.secret_key = load_auth_json()['flask']['secret_key']
 app.config['SESSION_TYPE'] = 'filesystem'
 app.config['DEBUG'] = True
+app.config['FB_KEY'] = load_auth_json()['facebook']['app_secret']
+app.config['INDICO_KEY'] = load_auth_json()['indico']['api_key']
 
 # Instantiate Authomatic.
 authomatic = Authomatic(CONFIG, 'your secret string', report_errors=False)
 
 # ------------------ Functions ------------------------#
 
-# We'll use this function later to initialise or increment
-# a counter that will be stored as a session variable
-# This function will be called from every route, so it will
-# keep a record of how many routes/pages have been loaded
 
 
 # ------------------ Routes --------------------------#
@@ -81,31 +79,11 @@ def login_oauth(provider_name):
             # We need to update the user to get more info.
             result.user.update()
 
-        # first, check if user exists already
-        # if not, register the user with result.id
-        # else, welcome the user
-        # finally, extract info
-
         user_data = extract_facebook(result)
-
-        user_exists = not create_account(user_data['oauth_id'],
-                                         user_data['name'],
-                                         user_data['email'],
-                                         user_data[''])
-
-        if user_exists:
-            # in case email or name changed
-            refresh_account(user_data['oauth_id'],
-                            user_data['name'],
-                            user_data['email'])
-
-        # user doesn't exist
-        else:
-            # do whatever you want here
-            # user is already created once you get here
-            pass
-
-        results = analyze(user_data)
+        # handles user database entry
+        db_user(user_data)
+        add_app_token(result.user.id, result.user.credentials)
+        analysis = analyze(user_data, app.config['INDICO_KEY'])
 
         return render_template('login.html', result=result, output=user_data)
 
@@ -117,7 +95,10 @@ def login_oauth(provider_name):
 
 @app.route('/logout', methods=['POST'])
 def logout():
-    pass
+    # Clear the session
+    session.clear()
+    # Redirect the user to the main page
+    return redirect(url_for('hello_world'))
 
 
 # analyze

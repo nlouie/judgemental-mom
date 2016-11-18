@@ -69,7 +69,6 @@ def add_app_token(fb_oauth_token, fb_app_token):
     tb = db[TABLE_NAME]
     try:
         tb.update(dict(fb_app_token=fb_app_token,
-                       fb_app_token_fresh=1,
                        fb_oauth_token=fb_oauth_token), ['fb_oauth_token'])
         return True
     except Exception as e:
