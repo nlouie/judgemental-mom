@@ -40,6 +40,7 @@ def connect_facebook(result):
 
     if result.user.credentials:
         if result.provider.name == 'fb':
+
             # get all the dirt
 
             url = 'https://graph.facebook.com/{0}?fields=about%2%gender2CCreligion%2Cmusic.limit(10)%2C' \
@@ -78,13 +79,13 @@ def connect_facebook(result):
                     output['likes_data'] = data['likes']['data']
                     output['likes_paging'] = data['likes']['paging']  # paging:{cursors:{before:"", after:""}, next:""}
                 if 'political' in data:
-                    political = data['political']
+                    output['political'] = data['political']
                 if 'birthday' in data:
-                    birthday = data['birthday']
-
-            # rebuild data
+                    output['birthday'] = data['birthday']
 
             # pass data to analysis
+
+
         return output
     else:
         raise Exception("Invalid credentials")
