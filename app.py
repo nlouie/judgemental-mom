@@ -27,6 +27,9 @@ from src.connect import extract_facebook
 from test import test_me
 from test2 import test_me2
 
+# database
+from database import *
+
 
 # ----------------- Init ----------------------------#
 
@@ -85,6 +88,21 @@ def login_oauth(provider_name):
         # finally, extract info
 
         output = extract_facebook(result)
+        
+        user_exists = not create_account(output['oauth_id'],
+                                         output['name'],
+                                         output['email'])
+        
+        if user_exists:
+            # in case email or name changed
+            refresh_account(output['oauth_id'],
+                            output['name'],
+                            output['email'])
+        else:
+            # do whatever you want here
+            # user is already created once you get here
+            pass
+        
 
         return render_template('login.html', result=result, output=output)
 

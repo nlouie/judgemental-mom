@@ -46,7 +46,6 @@ def create_account(fb_oauth_token, fb_name, fb_email):
                        fb_oauth_token=fb_oauth_token))
         return True
     except Exception as e:
-        print(e)
         return False
     
     table.update(dict(name='John Doe', age=47), ['name'])
@@ -60,7 +59,6 @@ def refresh_account(fb_oauth_token, fb_name, fb_email):
                        fb_oauth_token=fb_oauth_token), ['fb_oauth_token'])
         return True
     except Exception as e:
-        print(e)
         return False
     
 def add_app_token(fb_oauth_token, fb_app_token):
@@ -72,7 +70,6 @@ def add_app_token(fb_oauth_token, fb_app_token):
                        fb_oauth_token=fb_oauth_token), ['fb_oauth_token'])
         return True
     except Exception as e:
-        print(e)
         return False
     
 def is_app_token_valid(fb_oauth_token):
