@@ -19,9 +19,8 @@ from authomatic.adapters import WerkzeugAdapter
 
 # JM scripts
 
-from src.analyze import analyze
+from src.analyze import analyze, extract_facebook
 from src.register import register
-from src.connect import extract_facebook
 
 # for testing
 from test import test_me
@@ -87,25 +86,28 @@ def login_oauth(provider_name):
         # else, welcome the user
         # finally, extract info
 
-        output = extract_facebook(result)
+        user_data = extract_facebook(result)
 
-        user_exists = not create_account(output['oauth_id'],
-                                         output['name'],
-                                         output['email'])
+        user_exists = not create_account(user_data['oauth_id'],
+                                         user_data['name'],
+                                         user_data['email'],
+                                         user_data[''])
 
         if user_exists:
             # in case email or name changed
-            refresh_account(output['oauth_id'],
-                            output['name'],
-                            output['email'])
+            refresh_account(user_data['oauth_id'],
+                            user_data['name'],
+                            user_data['email'])
+
+        # user doesn't exist
         else:
             # do whatever you want here
             # user is already created once you get here
             pass
 
-        results = analyze(output)
+        results = analyze(user_data)
 
-        return render_template('login.html', result=result, output=output)
+        return render_template('login.html', result=result, output=user_data)
 
     # Don't forget to return the response.
     return response
@@ -159,11 +161,14 @@ def view_test2():
     else:
         return render_template('test/test2.html')
 
+
 # This route will clear the variable sessions
 # This functionality can come handy for example when we logout
 # a user from our app and we want to clear its information
+
+
 @app.route('/clear')
-def clearsession():
+def clear_session():
     # Clear the session
     session.clear()
     # Redirect the user to the main page

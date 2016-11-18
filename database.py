@@ -16,19 +16,20 @@ DB_URL = 'sqlite:///data/app.db'
 TABLE_NAME = 'users'
 
 TABLE_SCHEMA = \
-'''
-CREATE TABLE IF NOT EXISTS ''' + TABLE_NAME + ''' 
-(
-    id INTEGER PRIMARY KEY AUTOINCREMENT, 
-    fb_name VARCHAR(255) NOT NULL, 
-    fb_email VARCHAR(255) NOT NULL UNIQUE, 
-    fb_oauth_token VARCHAR(255) NOT NULL UNIQUE, 
-    fb_app_token VARCHAR(255), 
-    fb_app_token_fresh INTEGER DEFAULT 0
-)
-'''
+    '''
+    CREATE TABLE IF NOT EXISTS ''' + TABLE_NAME + '''
+    (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        fb_name VARCHAR(255) NOT NULL,
+        fb_email VARCHAR(255) NOT NULL UNIQUE,
+        fb_oauth_token VARCHAR(255) NOT NULL UNIQUE,
+        fb_app_token VARCHAR(255),
+        fb_app_token_fresh INTEGER DEFAULT 0
+    )
+    '''
 
 # ------------------ Helpers --------------------- #
+
 
 def get_db():
     db = dataset.connect(DB_URL)
@@ -36,6 +37,7 @@ def get_db():
     return db
 
 # ------------------ Publics --------------------- #
+
 
 def create_account(fb_oauth_token, fb_name, fb_email):
     db = get_db()
@@ -48,8 +50,9 @@ def create_account(fb_oauth_token, fb_name, fb_email):
     except Exception as e:
         return False
     
-    table.update(dict(name='John Doe', age=47), ['name'])
-    
+    # table.update(dict(name='John Doe', age=47), ['name'])
+
+
 def refresh_account(fb_oauth_token, fb_name, fb_email):
     db = get_db()
     tb = db[TABLE_NAME]
@@ -60,7 +63,8 @@ def refresh_account(fb_oauth_token, fb_name, fb_email):
         return True
     except Exception as e:
         return False
-    
+
+
 def add_app_token(fb_oauth_token, fb_app_token):
     db = get_db()
     tb = db[TABLE_NAME]
@@ -71,7 +75,9 @@ def add_app_token(fb_oauth_token, fb_app_token):
         return True
     except Exception as e:
         return False
-    
+
+# depreciate this.
+
 def is_app_token_valid(fb_oauth_token):
     db = get_db()
     tb = db[TABLE_NAME]
