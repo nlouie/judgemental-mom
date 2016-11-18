@@ -47,21 +47,12 @@ authomatic = Authomatic(CONFIG, 'your secret string', report_errors=False)
 # keep a record of how many routes/pages have been loaded
 
 
-def sumSessionCounter():
-  try:
-    session['counter'] += 1
-  except KeyError:
-    session['counter'] = 1
-
-
-
 # ------------------ Routes --------------------------#
 
 # index
 @app.route('/')
 def hello_world():
     # Initialise the counter, or increment it
-    sumSessionCounter()
     return render_template('index.html')
 
 
@@ -143,29 +134,6 @@ def view_test2():
         return render_template('test/test2.html', response=response)
     else:
         return render_template('test/test2.html')
-
-
-# Form route - Will show a form where the user can set its name
-# and will be set as a session variable
-@app.route('/form')
-def form():
-  sumSessionCounter()
-  # if a name has been sent, store it on a session variable
-  if request.args.get('yourname'):
-    session['name'] = request.args.get('yourname')
-    # And then redirect the user to the main page
-    return redirect(url_for('hello_world'))
-  else:
-    # If no name has been sent, show the form
-    return render_template('form.html', session=session)
-
-# This dummy page will just load the session data
-@app.route('/page1')
-def page1():
-  session['counter'] = session['counter'] + 1
-  # if is sset name, store it on session
-  return render_template('page1.html')
-
 
 # This route will clear the variable sessions
 # This functionality can come handy for example when we logout
