@@ -13,16 +13,6 @@ def extract_facebook(result):
     email = ""                          # save this in db
 
     # -- Never store personal information below in db --- #
-    # about = ""
-    # religion = ""
-    # artists_likes = []
-    # relationship_status = ""
-    # feed_data = {}
-    # likes_data = {}
-    # political = ""
-    # num_friends = -1
-    # birthday = ""
-    # gender = ""
 
     output = {'name': name,
               'email': email,
@@ -60,32 +50,34 @@ def extract_facebook(result):
                 # important to perform input validation!
 
                 if 'about' in data:
-                    output['about'] = data['about']
+                    output['about'] = data.get('about')
                 if 'gender' in data:
-                    output['gender'] = data['gender']
+                    output['gender'] = data.get('gender')
                 if 'religion' in data:
-                    output['religion'] = data['religion']
+                    output['religion'] = data.get('religion')
                 if 'music' in data:
-                    for artist in data['music']['data']:
+                    for artist in data.get('music').get('data'):
                         artists = []
-                        artists += [artist['name']]
+                        artists += [artist.get('name')]
                         output['artists_likes'] = artists
                 if 'relationship_status' in data:
-                    output['relationship_status'] = data['relationship_status']
+                    output['relationship_status'] = data.get('relationship_status')
                 if 'feed' in data:
-                    output['feed_data'] = data['feed']['data']
-                    output['feed_paging'] = data['feed']['paging']                   # paging:{previous:"",next:""}
+                    output['feed_data'] = data.get('feed').get('data')
+                    output['feed_paging'] = data.get('feed').get('paging')               # paging:{previous:"",next:""}
                 if 'email' in data:
-                    output['email'] = data['email']
+                    output['email'] = data.get('email')
                 if 'friends' in data:
-                    output['num_friends'] = data['friends']['summary']['total_count']
+                    output['num_friends'] = data.get('friends').get('summary').get('total_count')
                 if 'likes' in data:
-                    output['likes_data'] = data['likes']['data']
-                    output['likes_paging'] = data['likes']['paging']  # paging:{cursors:{before:"", after:""}, next:""}
+                    output['likes_data'] = data.get('likes').get('data')
+                    # paging:{cursors:{before:"", after:""}, next:""}
+                    output['likes_paging'] = data.get('likes').get('paging')
                 if 'political' in data:
-                    output['political'] = data['political']
+                    output['political'] = data.get('political')
                 if 'birthday' in data:
-                    output['birthday'] = data['birthday']
+                    output['birthday'] = data.get('birthday')
+        print(output)
         return output
     else:
         raise Exception("Invalid credentials")
