@@ -87,6 +87,7 @@ I suggest using PyCharm and when setting the interpreter, create a new virtual e
 - [Flask Docs](http://flask.pocoo.org/docs/)
 - [Jinja Templates](http://jinja.pocoo.org/docs/dev/templates/)
 - [Authomatic Flask](http://peterhudec.github.io/authomatic/examples/flask-simple.html)
+- [WTF Forms](http://flask.pocoo.org/docs/0.11/patterns/wtforms/)
 
 ### Dataset
 - [Dataset docs](https://dataset.readthedocs.io/en/latest/)
@@ -94,6 +95,10 @@ I suggest using PyCharm and when setting the interpreter, create a new virtual e
 ### Jetbrains
 - [Pycharm](https://www.jetbrains.com/pycharm/)
 - [Jetbrains education](https://www.jetbrains.com/student/)
+
+### Security
+- [OWASP Top 10](https://www.owasp.org/index.php/Category:OWASP_Top_Ten_Project)
+
 
 
 ## Todo

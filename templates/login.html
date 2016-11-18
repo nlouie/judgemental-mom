@@ -14,7 +14,7 @@
         <h2>Damn that error: {{ result.error.message }}</h2>
     {% endif %} col-md-5 col-md-offset-4">
 
-    <h3>Facebook authentication successful! Check the console for debug output.</h3>
+    <h3>Facebook authentication successful! Check the console for debug output. The access token has been saved in memory.</h3>
 
     {# Welcome the user. #}
     {% if result.user %}
@@ -23,45 +23,6 @@
         <h2>Your email is: {{ result.user.email }}</h2>
     {% endif %}
 
-
-
-        {# If the user has credentials, we can access his/her protected resources. #}
-{#    {% if result.user.credentials %}#}
-{##}
-        {# Let's get the user's 5 most recent statuses. #}
-{#        {% if result.provider.name == 'fb' %}#}
-{#            You are logged in with Facebook.<br />#}
-{##}
-            {# Insert the user's ID to the URL and access the resource. #}
-{#            {% set url = 'https://graph.facebook.com/{0}?fields=feed.limit(5)'.format(result.user.id) %}#}
-{#            {% set response = result.provider.access(url) %}#}
-{##}
-            {# Parse the response. #}
-{#            {% if response.status == 200 %}#}
-{##}
-{#                {% if response.data.error %}#}
-{#                    Damn that error: {{ response.data.error }}!#}
-{#                {% endif %}#}
-{##}
-{#                {% if response.data.feed.data %}#}
-{#                    Your 5 most recent statuses:<br />#}
-{##}
-{#                    {% for status in response.data.feed.data %}#}
-{#                        <h3>{{ status.message or status.name or status.story }}</h3>#}
-{#                        Posted on: {{ status.created_time }}#}
-{#                    {% endfor %}#}
-{#                {% endif %}#}
-{##}
-{#            {% endif %}{# response.status == 200 #}
-{##}
-{#            # prototyping#}
-{##}
-{##}
-{##}
-{#        {% endif %}{# result.provider.name == 'fb' #}
-{##}
-{#    {% endif %}{# result.user.credentials #}
-
-
+    <a href="/analyze" class="button">Analyze my Facebook</a><lead>You'll even get back song recs! Wowow</lead>
     </div>
 {% endblock %}

@@ -1,0 +1,18 @@
+{# signout.html #}
+{% extends "layouts/layout.html" %}
+{% block title %}Sign up{% endblock %}
+{% block head %}
+    {{ super() }}
+    <style type="text/css">
+        .important { color: #336699; }
+    </style>
+{% endblock %}
+{% block content %}
+    <h1>Sign up</h1>
+    <p class="important">
+      Sign up to Judgemental Mom!
+    </p>
+    <div class="container">
+        <a href="/signup" class="button">Sign up</a>
+    </div>
+{% endblock %}

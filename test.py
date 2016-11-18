@@ -6,7 +6,8 @@
 # Description:
 
 # ------------------ Imports --------------------- #
-import indicoio
+
+import requests
 
 # ------------------ Functions --------------------- #
 
@@ -19,8 +20,9 @@ def test_me(s, api_key):
         returns dictionary of emotion values
     '''
 
-    indicoio.config.api_key = api_key
-    response = indicoio.emotion(s)
-    return response
+    headers ={'X-ApiKey':str(api_key)}
+    data = {'data': str(s)}
+    r = requests.get('https://apiv2.indico.io/emotion/', headers=headers, data=data)
+    return r.json()
 
 # eof

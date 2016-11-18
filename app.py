@@ -4,6 +4,8 @@
 # Created by nlouie on 11/1/16
 # Last updated by nlouie on 11/6/16
 # Description: This is the main app script. Run me to start the server!
+#              Initializes the web app and sets up views (routes)
+
 
 # ------------------ Imports --------------------- #
 
@@ -20,6 +22,7 @@ from authomatic.adapters import WerkzeugAdapter
 
 from src.analyze import analyze
 from src.register import register
+from src.connect import connect_facebook
 
 # for testing
 from test import test_me
@@ -27,8 +30,6 @@ from test2 import test_me2
 
 
 # ----------------- Init ----------------------------#
-
-
 
 # initialize flask
 app = Flask(__name__)
@@ -74,7 +75,7 @@ def login_oauth(provider_name):
         # The rest happens inside the template.
 
         # register(result)
-        analyze(result)
+        connect_facebook(result)
 
         return render_template('login.html', result=result)
 
