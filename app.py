@@ -85,6 +85,7 @@ def login_oauth(provider_name):
         # finally, extract info
 
         output = extract_facebook(result)
+        results = analyze(output)
 
         return render_template('login.html', result=result, output=output)
 

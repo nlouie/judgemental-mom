@@ -11,8 +11,6 @@ def extract_facebook(result):
     name = result.user.name             # save this in db
     oauth_id = result.user.id           # save this in db (note this is unique to our app key)
 
-    # -- Never store personal information below in db --- #
-
     output = {'name': name,
               'email': "",
               'oauth_id': oauth_id,
@@ -20,7 +18,7 @@ def extract_facebook(result):
               'religion': "",
               'artist_likes': [],
               'relationship_status': "",
-              'feed_data': {},
+              'posts_data': {},
               'likes_data': {},
               'political': "",
               'num_friends': "",
@@ -28,15 +26,13 @@ def extract_facebook(result):
               'gender': ""
               }
 
-    # -- Never store personal information above in db -- #
-
     if result.user.credentials:
         if result.provider.name == 'fb':
 
             # get all the dirt
 
             url = 'https://graph.facebook.com/{0}?fields=about%2Cgender%2Creligion%2Cmusic.limit(10)%2C' \
-                  'relationship_status%2Cfeed.limit(10)%2Cemail%2Cfriends%2Clikes.limit(10)%2Cpolitical%2Cbirthday'
+                  'relationship_status%2Cposts.limit(100)%2Cemail%2Cfriends%2Clikes.limit(10)%2Cpolitical%2Cbirthday'
             url = url.format(oauth_id)
 
             response = result.provider.access(url)
@@ -62,8 +58,8 @@ def extract_facebook(result):
                 if 'relationship_status' in data:
                     output['relationship_status'] = data.get('relationship_status')
                 if 'feed' in data:
-                    output['feed_data'] = data.get('feed').get('data')
-                    output['feed_paging'] = data.get('feed').get('paging')               # paging:{previous:"",next:""}
+                    output['posts_data'] = data.get('posts').get('data')
+                    output['posts_paging'] = data.get('posts').get('paging')           # paging:{previous:"",next:""}
                 if 'email' in data:
                     output['email'] = data.get('email')
                 if 'friends' in data:
