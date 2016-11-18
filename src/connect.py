@@ -24,7 +24,9 @@ def connect_facebook(result):
     # birthday = ""
     # gender = ""
 
-    output = {'about': "",
+    output = {'name': name,
+              'oauth_id': oauth_id,
+              'about': "",
               'religion': "",
               'artist_likes': "",
               'relationship_status': "",

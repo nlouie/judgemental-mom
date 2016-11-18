@@ -72,9 +72,6 @@ def login_oauth(provider_name):
             # We need to update the user to get more info.
             result.user.update()
 
-        # The rest happens inside the template.
-
-        # register(result)
         connect_facebook(result)
 
         return render_template('login.html', result=result)
