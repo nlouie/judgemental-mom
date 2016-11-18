@@ -25,15 +25,16 @@ def extract_facebook(result):
     # gender = ""
 
     output = {'name': name,
+              'email': email,
               'oauth_id': oauth_id,
               'about': "",
               'religion': "",
-              'artist_likes': "",
+              'artist_likes': [],
               'relationship_status': "",
               'feed_data': {},
               'likes_data': {},
               'political': "",
-              'num_friends': -1,
+              'num_friends': "",
               'birthday': "",
               'gender': ""
               }
@@ -45,38 +46,39 @@ def extract_facebook(result):
 
             # get all the dirt
 
-            url = 'https://graph.facebook.com/{0}?fields=about%2%gender2CCreligion%2Cmusic.limit(10)%2C' \
-                  'relationship_status%2Cfeed.limit(10)%2Cemail%2Cfriends%2Clikes.limit(10)%2Cpolitical%birthday'\
-                .format(oauth_id)
+            url = 'https://graph.facebook.com/{0}?fields=about%2Cgender%2Creligion%2Cmusic.limit(10)%2C' \
+                  'relationship_status%2Cfeed.limit(10)%2Cemail%2Cfriends%2Clikes.limit(10)%2Cpolitical%2Cbirthday'
+            url = url.format(oauth_id)
 
             response = result.provider.access(url)
             if response.status == 200:
                 if 'error' in response.data:
                     raise Exception("Invalid response: " + response.status)
                 data = response.data
-                print(data)
 
                 # extract data and add to output dictionary
                 # important to perform input validation!
 
                 if 'about' in data:
-                    about = data['about']
+                    output['about'] = data['about']
                 if 'gender' in data:
-                    gender = data['gender']
+                    output['gender'] = data['gender']
                 if 'religion' in data:
-                    pass
+                    output['religion'] = data['religion']
                 if 'music' in data:
                     for artist in data['music']['data']:
-                        output['artists_likes'] += [artist['name']]
+                        artists = []
+                        artists += [artist['name']]
+                        output['artists_likes'] = artists
                 if 'relationship_status' in data:
                     output['relationship_status'] = data['relationship_status']
                 if 'feed' in data:
-                    output['feed_data'] = data['posts']['data']
-                    feed_paging = data['posts']['paging']                   # paging:{previous:"",next:""}
+                    output['feed_data'] = data['feed']['data']
+                    output['feed_paging'] = data['feed']['paging']                   # paging:{previous:"",next:""}
                 if 'email' in data:
                     output['email'] = data['email']
                 if 'friends' in data:
-                    output['num_friends'] = data['friends']['data']['summary']['total_count']
+                    output['num_friends'] = data['friends']['summary']['total_count']
                 if 'likes' in data:
                     output['likes_data'] = data['likes']['data']
                     output['likes_paging'] = data['likes']['paging']  # paging:{cursors:{before:"", after:""}, next:""}
@@ -84,10 +86,6 @@ def extract_facebook(result):
                     output['political'] = data['political']
                 if 'birthday' in data:
                     output['birthday'] = data['birthday']
-
-            # pass data to analysis
-
-
         return output
     else:
         raise Exception("Invalid credentials")

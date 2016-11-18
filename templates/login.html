@@ -23,5 +23,8 @@
         <h2>Your email is: {{ result.user.email }}</h2>
     {% endif %}
 
+    {% if session %}
+        {{ session }}
+    {% endif %}
     </div>
 {% endblock %}

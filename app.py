@@ -17,8 +17,6 @@ from auth_config import CONFIG     # for authomatic
 from authomatic import Authomatic
 from authomatic.adapters import WerkzeugAdapter
 
-from flask.ext.session import Session
-
 # JM scripts
 
 from src.analyze import analyze
@@ -37,8 +35,6 @@ app = Flask(__name__)
 app.secret_key = 'sdaflkjsdlfksdlkfjsdlkfjlsdjflk32=4093284935u43oinkf'
 app.config['SESSION_TYPE'] = 'filesystem'
 app.config['DEBUG'] = True
-sess = Session(app)
-
 
 # Instantiate Authomatic.
 authomatic = Authomatic(CONFIG, 'your secret string', report_errors=False)
@@ -92,7 +88,7 @@ def login_oauth(provider_name):
             # We need to update the user to get more info.
             result.user.update()
 
-        # connect_facebook(result)
+        extract_facebook(result)
 
         return render_template('login.html', result=result)
 
