@@ -2,7 +2,7 @@
 # Judgemental Mom
 # CS411 A2 Group 8 Project
 # Created by nlouie on 11/17/16
-# Last updated by corey on 11/18/16
+# Last updated by nlouie on 11/25/16
 # Description: Extracts fb analysis response data, analyzes the data.
 
 import authomatic
@@ -48,7 +48,8 @@ def create_fb_request_url(oauth_id):
               'likes.limit(10)',
               'political',
               'birthday']
-    # create the url encoding for 'fields=about,...' by joining the list of fields by a common and encoding.
+
+    # create the url encoding for 'fields=about,...' by joining the list of fields by a comma and encoding.
     params = urlencode({'fields': ','.join(fields)})
     # format %s
     url = base % params

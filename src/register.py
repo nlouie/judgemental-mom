@@ -10,7 +10,6 @@ from database import *
 
 def db_user(user_data):
     """
-
     :param user_data:
     :return:
     """

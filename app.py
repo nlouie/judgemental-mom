@@ -95,21 +95,15 @@ def login_oauth(provider_name):
 
 @app.route('/logout', methods=['POST'])
 def logout():
-    # Clear the session
-    session.clear()
-    # Redirect the user to the main page
-    return redirect(url_for('hello_world'))
-
+    clear_session()
 
 # analyze
-
 
 @app.route('/analyze')
 def view_analyze():
     return render_template('analyze.html')
 
 # connect
-
 
 @app.route('/connect')
 def view_connect():
