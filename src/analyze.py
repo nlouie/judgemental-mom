@@ -30,6 +30,7 @@ def init_output():
               }
     return output
 
+
 def create_fb_request_url(oauth_id):
     # get all the dirt
 
@@ -119,7 +120,8 @@ def extract_facebook(result):
 def analyze(user_data, indico_api_key):
     results = {}
     # Analyze messages
-    results['messages'] = analyze_messages(user_data, indico_api_key)
+    text_analysis_list = ['emotion', 'political']
+    results['messages'] = analyze_messages(user_data, indico_api_key, text_analysis_list)
     return results
 
 
@@ -133,22 +135,31 @@ def extract_messages_from_posts(posts):
     return messages
 
 
-def analyze_messages(user_data, indico_api_key):
+def analyze_messages(user_data, indico_api_key, text_analysis_list):
+    """
+    Send analysis requests to indicio
+    :param user_data: dictionary of user's extracted facebook data
+    :param indico_api_key: str
+    :param text_analysis_list: list of parameters to analyze
+    :return: the dictionary of indicio results
+    """
     results = {}
     posts_data = user_data.get('posts_data')
-    print(posts_data)
+    # print(posts_data)
     messages = extract_messages_from_posts(posts_data)
-    print('messages', messages)
+    # print('messages', messages)
     if len(messages) < 1:
         results['error'] = "Not enough data"
     else:
-        print('emotion analysis')
-        # make batch emotion anaysis to indicoio
-
+        # set up indicio request
         headers = {'X-ApiKey': str(indico_api_key)}
         data = {'data': messages}
-        r = requests.get('https://apiv2.indico.io/emotion/', headers=headers, data=data)
-        results['emotion'] = r.json()
-    print(results)
-    return results
 
+        # analyze each desired analysis type (currently just emotion and political)
+        # https://indico.io/docs#text
+        for text_analysis in text_analysis_list:
+            url = 'https://apiv2.indico.io/{0}/'.format(str(text_analysis))
+            r = requests.get(url, headers=headers, data=data)
+            results[str(text_analysis)] = r.json()
+    # print(results)
+    return results
