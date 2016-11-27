@@ -5,13 +5,22 @@
 # Last updated by nlouie on 11/25/16
 # Description: Extracts fb analysis response data, analyzes the data.
 
+# --------------- IMPORTS -----------------------------#
+
 import authomatic
 from database import add_app_token
 from urllib.parse import urlunparse, urlencode
 import requests
 
+from src.spotify import suggest_emotion_playlist
+
+# ------------- FUNCTIONS ----------------------------#
 
 def init_output():
+    """
+    Creates an output dictionary for post-extraction
+    :return: dictionary
+    """
     output = {'name': "",
               'email': "",
               'oauth_id': "",
@@ -30,8 +39,12 @@ def init_output():
               }
     return output
 
-
 def create_fb_request_url(oauth_id):
+    """
+    Creates the facebook request url dependant on the fields
+    :param oauth_id: oauth_id from fb login
+    :return: url string
+    """
     # get all the dirt
 
     # add fb id to base
@@ -57,8 +70,13 @@ def create_fb_request_url(oauth_id):
 
 
 def extract_facebook_request(output, data):
-    # extract data and add to output dictionary
-    # important to perform input validation!
+    """
+    extract data and add to output dictionary
+    it's important to perform input validation in the future.
+    :param output: output from init_output()
+    :param data: output from facebook extraction
+    :return: output dictionary
+    """
 
     if 'about' in data:
         output['about'] = data.get('about')
@@ -93,7 +111,7 @@ def extract_facebook_request(output, data):
 
 def extract_facebook(result):
     """
-
+    Make facebook request here and then extract the data.
     :param result: The Facebook oAuth result
     :return output: dictionary of data
     """
@@ -118,15 +136,12 @@ def extract_facebook(result):
         raise Exception("Invalid credentials")
 
 
-def analyze(user_data, indico_api_key):
-    results = {}
-    # Analyze messages
-    text_analysis_list = ['emotion', 'political']
-    results['messages'] = analyze_messages(user_data, indico_api_key, text_analysis_list)
-    return results
-
-
 def extract_messages_from_posts(posts):
+    """
+    Given the requested facebook posts, extract all the valid messages
+    :param posts: dictionary from user_data
+    :return: list of message strings
+    """
     messages = []
     for post in posts:
         if 'message' in post and 'status_type' in post:
@@ -164,3 +179,17 @@ def analyze_messages(user_data, indico_api_key, text_analysis_list):
             results[str(text_analysis)] = r.json()
     # print(results)
     return results
+
+def analyze(user_data, indico_api_key):
+    """
+    Analyze the user data
+    :param user_data: dict, user_data extracted
+    :param indico_api_key: str
+    :return:
+    """
+    results = {}
+    # Analyze messages
+    text_analysis_list = ['emotion', 'political']
+    results['messages'] = analyze_messages(user_data, indico_api_key, text_analysis_list)
+    return results
+

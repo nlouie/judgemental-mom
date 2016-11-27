@@ -21,6 +21,7 @@ from authomatic.adapters import WerkzeugAdapter
 
 from src.analyze import analyze, extract_facebook
 from src.register import db_user
+from src.spotify import suggest_emotion_playlist
 
 # for testing
 from test import test_me
@@ -84,8 +85,8 @@ def login_oauth(provider_name):
         db_user(user_data)
         add_app_token(result.user.id, result.user.credentials)
         analysis = analyze(user_data, app.config['INDICO_KEY'])
-
-        return render_template('login.html', result=result, output=user_data)
+        playlists_recs = suggest_emotion_playlist(analysis['messages']['emotion'])
+        return render_template('login.html', result=result, output=user_data, playlists_recs=playlists_recs)
 
     # Don't forget to return the response.
     return response
