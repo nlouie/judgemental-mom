@@ -95,10 +95,19 @@ def hello_world():
     return render_template('index.html')
 
 
+@app.route('/about')
+def view_about():
+    """
+    about page
+    :return:
+    """
+    return render_template('about.html')
+
+
 @app.route('/account')
 def view_account():
     """
-    User account
+    User account page
     :return:
     """
     # todo: figure out sessions
@@ -107,7 +116,7 @@ def view_account():
 
 @app.route('/admin')
 @requires_auth
-def admin():
+def view_admin():
     """
     Admin page
     :return:
@@ -214,6 +223,7 @@ def view_test2():
         return render_template('test/test2.html')
 
 #  // Error Handling //
+
 
 @app.errorhandler(404)
 def page_not_found(error):
