@@ -3,13 +3,11 @@
 {% block title %}About us{% endblock %}
 {% block head %}
     {{ super() }}
-    <style type="text/css">
-
-    </style>
+    <link href="{{ url_for('static', filename='css/about.css') }}" rel="stylesheet">
 {% endblock %}
 {% block content %}
-    <h1>About us</h1>
-    <div class="container col-md-12">
+    <div class="container col-md-12" id="about-container">
+        <h1>About us</h1>
         <p>Judgemental Mom is your anti-social-media-analyzer. Simply sign in with your Facebook and get judged.</p>
 
         <p><a href="https://github.com/nlouie/judgemental-mom">Fork Judgemental Mom on Github!</a></p>

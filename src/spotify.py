@@ -20,7 +20,7 @@ def suggest_emotion_playlist(results_emotion):
     Expected returned dict:
     {
       "playlists": {
-        "href": {"..."},
+        "href": "...",
         "items": [...],
         "name": "..."
 
@@ -38,7 +38,7 @@ def suggest_emotion_playlist(results_emotion):
     if req.status_code == 200:
         # convert to json
         r_dict = req.json()
-        return r_dict
+        return r_dict, top_mood
     else:
         return {'error': {'message': 'problem with request'}}
 

@@ -2,29 +2,28 @@
 {% block title %}Login{% endblock %}
 {% block head %}
     {{ super() }}
-    <style type="text/css">
-
-    </style>
+    <link href="{{ url_for('static', filename='css/login.css') }}" rel="stylesheet">
 {% endblock %}
 {% block content %}
-    <h1>Login</h1>
 
-    <div class="container        {# Check for errors. #}
-    {% if result.error %}
-        <h3>Damn that error: {{ result.error.message }}</h3>
-    {% endif %} col-md-6 col-md-offset-3">
+
+    <div class="container col-md-6 col-md-offset-3" id="login-container">        {# Check for errors. #}
+        <h1>Login</h1>
+        {% if result.error %}
+            <h3>Damn that error: {{ result.error.message }}</h3>
+        {% endif %}
 
         <h5>Facebook authentication successful! Check the console for debug output. The access token has been saved in
             memory.</h5>
 
         {# Welcome the user. #}
-        {% if result.user %}
-            <h3>Hi {{ result.user.name }}</h3>
-            <h5>Your id is: {{ result.user.id }}</h5>
-            <h5>Your email is: {{ result.user.email }}</h5>
-            <h5>Your relationship status is: {{ result.user.relationship_status }}</h5>
-            <h5>Your gender is: {{ result.user.gender }}</h5>
-        {% endif %}
+{#        {% if result.user %}#}
+{#            <h3>Hi {{ result.user.name }}</h3>#}
+{#            <h5>Your id is: {{ result.user.id }}</h5>#}
+{#            <h5>Your email is: {{ result.user.email }}</h5>#}
+{#            <h5>Your relationship status is: {{ result.user.relationship_status }}</h5>#}
+{#            <h5>Your gender is: {{ result.user.gender }}</h5>#}
+{#        {% endif %}#}
 
         {% if output %}
             <h3>Hi {{ output.name }}</h3>
@@ -34,15 +33,25 @@
             <h5>Your gender is: {{ output.gender }}</h5>
         {% endif %}
 
+            <h3>Facebook Posts Analysis</h3>
+            {% if top_mood %}
+                <h5>Top mood: {{ top_mood }}</h5>
+            {%  endif %}
+
         {% if playlists_recs %}
-            <div class="container col-md-12">
+            <div class="container">
                 <h2>Suggested Playlists</h2>
                 <table class="table">
-                    {% for playlist in playlists_recs.playlists %}
-                        <tr>
-                            <td></td>
-                        </tr>
-                    {% endfor %}
+{#                    {% for playlist in playlists_recs.playlists.items %}#}
+{#                        <tr>#}
+{#                            <th>Name</th>#}
+{#                            <th>Image</th>#}
+{#                        </tr>#}
+{#                        <tr>#}
+{#                            <td><a href="{{ playlist.href }}">{{ playlist.name }}</a></td>#}
+{#                        </tr>#}
+{#                    {% endfor %}#}
+                    {{ playlists_recs }}
                 </table>
 
             </div>

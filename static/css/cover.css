@@ -6,7 +6,7 @@
 a,
 a:focus,
 a:hover {
-  color: #fff;
+  color: #2aabd2;
 }
 
 /* Custom default button */
@@ -66,6 +66,14 @@ body {
   margin-top: 10px;
   margin-bottom: 10px;
   font-family: 'Pacifico', cursive;
+}
+
+.masthead-brand > a{
+    color: #fff;
+}
+.masthead-brand > a:hover,
+.masthead-brand > a:focus{
+    color: #2aabd2;
 }
 
 .masthead-nav > li {
@@ -161,4 +169,8 @@ body {
   .cover-container {
     width: 700px;
   }
+}
+
+.link {
+    color: #2aabd2;
 }

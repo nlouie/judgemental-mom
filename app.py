@@ -182,8 +182,10 @@ def login_oauth(provider_name):
         db_user(user_data)
         user_database.add_app_token(result.user.id, result.user.credentials)
         analysis = analyze(user_data, app.config['INDICO_KEY'])
-        playlists_recs = suggest_emotion_playlist(analysis['messages']['emotion'])
-        return render_template('login.html', result=result, output=user_data, playlists_recs=playlists_recs)
+        print(analysis['messages']['emotion'])
+        playlists_recs, top_mood = suggest_emotion_playlist(analysis['messages']['emotion']['results'])
+        return render_template('login.html', result=result, output=user_data, playlists_recs=playlists_recs,
+                               top_mood=top_mood)
 
     # Don't forget to return the response.
     return response
@@ -228,12 +230,16 @@ def view_test2():
 @app.errorhandler(404)
 def page_not_found(error):
     """
-    http://flask.pocoo.org/docs/0.11/api/
+    http://flask.pocoo.org/docs/0.11/patterns/errorpages/
     :param error:
     :return:
     """
-    return render_template('404.html')
+    return render_template('404.html'), 404
 
+
+@app.errorhandler(500)
+def internal_server_error(error):
+    return render_template('404.html'), 500
 
 # --------------- SCRIPT ----------------------- #
 
