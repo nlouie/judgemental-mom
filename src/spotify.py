@@ -32,7 +32,7 @@ def suggest_emotion_playlist(results_emotion):
     """
     top_mood = max(results_emotion)
     # make the api call
-    endpoint = 'https://api.spotify.com/v1/search?q=' + str(top_mood) + '&type=playlist'
+    endpoint = 'https://api.spotify.com/v1/search?q=' + str(top_mood) + '&type=playlist&limit=10'
     req = requests.get(endpoint)
 
     if req.status_code == 200:
