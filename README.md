@@ -87,6 +87,7 @@ $ touch app.db
     - [Graph API](https://developers.facebook.com/docs/graph-api/)
     - [API Explorer - Super useful!](https://developers.facebook.com/tools/explorer/)
 - [Spotify API](https://developer.spotify.com/)
+    - [Spotify Web API](https://developer.spotify.com/web-api/console/)
 - [Indico Docs](https://indico.io/docs)
 
 ### Flask
@@ -106,9 +107,6 @@ $ touch app.db
 ### Security
 - [OWASP Top 10](https://www.owasp.org/index.php/Category:OWASP_Top_Ten_Project)
 
-
-
-## Todo
 
 ### Required functionality
 
