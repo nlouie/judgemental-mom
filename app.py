@@ -47,7 +47,7 @@ app.config['FB_KEY'] = auth['facebook']['app_secret']
 app.config['INDICO_KEY'] = auth['indico']['api_key']
 
 # Instantiate Authomatic.
-authomatic = Authomatic(CONFIG, 'your secret string', report_errors=False)
+authomatic = Authomatic(CONFIG, auth['flask']['secret_key'], report_errors=False)
 
 
 # ------------------ Functions ------------------------#
@@ -95,12 +95,62 @@ def hello_world():
     return render_template('index.html')
 
 
-# facebook login with authomatic
+@app.route('/account')
+def view_account():
+    """
+    User account
+    :return:
+    """
+    # todo: figure out sessions
+    return render_template('account.html')
+
+
+@app.route('/admin')
+@requires_auth
+def admin():
+    """
+    Admin page
+    :return:
+    """
+    all_users = user_database.select_all_users()
+    return render_template('admin.html', all_users=all_users)
+
+
+@app.route('/analyze')
+def view_analyze():
+    """
+    Currently unused.
+    :return:
+    """
+    return render_template('analyze.html')
+
+
+@app.route('/connect')
+def view_connect():
+    """
+    Currently Unused
+    :return:
+    """
+    return render_template('connect.html')
+
+
+@app.route('/clear')
+def clear_session():
+    """
+    This route will clear the variable sessions
+    This functionality can come handy for example when we logout
+    a user from our app and we want to clear its information
+    :return:
+    """
+    session.clear()
+    # Redirect the user to the main page
+    return redirect(url_for('hello_world'))
 
 
 @app.route('/login/<provider_name>/', methods=['GET', 'POST'])
 def login_oauth(provider_name):
     """
+    facebook login with authomatic
     Login handler, must accept both GET and POST to be able to use OpenID.
     We currently only accept facebook logins
     """
@@ -135,61 +185,6 @@ def logout():
     clear_session()
 
 
-@app.route('/analyze')
-def view_analyze():
-    """
-    Currently unused.
-    :return:
-    """
-    return render_template('analyze.html')
-
-
-@app.route('/connect')
-def view_connect():
-    """
-    Currently Unused
-    :return:
-    """
-    return render_template('connect.html')
-
-
-@app.route('/account')
-def view_account():
-    """
-    User account
-    :return:
-    """
-    # todo: figure out sessions
-    return render_template('account.html')
-
-
-@app.route('/admin')
-@requires_auth
-def admin():
-    """
-    Admin page
-    :return:
-    """
-    all_users = user_database.select_all_users()
-    return render_template('admin.html', all_users=all_users)
-
-
-@app.route('/clear')
-def clear_session():
-    """
-    This route will clear the variable sessions
-    This functionality can come handy for example when we logout
-    a user from our app and we want to clear its information
-    :return:
-    """
-    session.clear()
-    # Redirect the user to the main page
-    return redirect(url_for('hello_world'))
-
-
-# Examples for assignment 3 or for reference #
-
-
 @app.route('/test', methods=['GET', 'POST'])
 def view_test():
     """
@@ -197,7 +192,7 @@ def view_test():
     :return:
     """
     if request.method == 'POST':
-        api_key = load_auth_json()['indico']['api_key']
+        api_key = auth['indico']['api_key']
         response = request.form['input']
         emotion_dict = test_me(response, api_key)
         return render_template('test/test.html', response=emotion_dict)
@@ -218,6 +213,7 @@ def view_test2():
     else:
         return render_template('test/test2.html')
 
+#  // Error Handling //
 
 @app.errorhandler(404)
 def page_not_found(error):
@@ -228,6 +224,8 @@ def page_not_found(error):
     """
     return render_template('404.html')
 
+
+# --------------- SCRIPT ----------------------- #
 
 if __name__ == '__main__':
     # http://flask.pocoo.org/docs/0.11/config/
