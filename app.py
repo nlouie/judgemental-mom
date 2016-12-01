@@ -47,6 +47,31 @@ authomatic = Authomatic(CONFIG, 'your secret string', report_errors=False)
 # ------------------ Functions ------------------------#
 
 
+############### Basic Authentication Temporary ###################
+
+from functools import wraps
+
+def check_auth(username, password):
+    """This function is called to check if a username /
+    password combination is valid.
+    """
+    return username == 'admin' and password == 'secret'
+
+def authenticate():
+    """Sends a 401 response that enables basic auth"""
+    return Response(
+    'Could not verify your access level for that URL.\n'
+    'You have to login with proper credentials', 401,
+    {'WWW-Authenticate': 'Basic realm="Login Required"'})
+
+def requires_auth(f):
+    @wraps(f)
+    def decorated(*args, **kwargs):
+        auth = request.authorization
+        if not auth or not check_auth(auth.username, auth.password):
+            return authenticate()
+        return f(*args, **kwargs)
+    return decorated
 
 # ------------------ Routes --------------------------#
 
@@ -91,56 +116,48 @@ def login_oauth(provider_name):
     # Don't forget to return the response.
     return response
 
-# logout
-
 
 @app.route('/logout', methods=['POST'])
 def logout():
     clear_session()
 
-# analyze
 
 @app.route('/analyze')
 def view_analyze():
+    """
+    Currently unused.
+    :return:
+    """
     return render_template('analyze.html')
 
-# connect
 
 @app.route('/connect')
 def view_connect():
+    """
+    Currently Unused
+    :return:
+    """
     return render_template('connect.html')
 
+
 @app.route('/account')
-def view_connect():
+def view_account():
+    """
+    User account
+    :return:
+    """
+    # todo: figure out sessions
     return render_template('account.html')
 
-# Examples for assignment 3 or for reference
 
-
-# indico mood analysis
-
-@app.route('/test', methods=['GET', 'POST'])
-def view_test():
-    if request.method == 'POST':
-        api_key = load_auth_json()['indico']['api_key']
-        response = request.form['input']
-        emotion_dict = test_me(response, api_key)
-        return render_template('test/test.html', response=emotion_dict)
-    else:
-        return render_template('test/test.html')
-
-# spotify artist search
-
-
-@app.route('/test2', methods=['GET', 'POST'])
-def view_test2():
-    if request.method == 'POST':
-        artist_query = request.form['artist']
-        response = test_me2(artist_query)
-        return render_template('test/test2.html', response=response)
-    else:
-        return render_template('test/test2.html')
-
+@app.route('/admin')
+@requires_auth
+def admin():
+    """
+    Admin page
+    :return:
+    """
+    return render_template('admin.html')
 
 # This route will clear the variable sessions
 # This functionality can come handy for example when we logout
@@ -149,11 +166,44 @@ def view_test2():
 
 @app.route('/clear')
 def clear_session():
+    """
     # Clear the session
+    :return:
+    """
     session.clear()
     # Redirect the user to the main page
     return redirect(url_for('hello_world'))
 
+# Examples for assignment 3 or for reference
+
+
+@app.route('/test', methods=['GET', 'POST'])
+def view_test():
+    """
+    # indico mood analysis
+    :return:
+    """
+    if request.method == 'POST':
+        api_key = load_auth_json()['indico']['api_key']
+        response = request.form['input']
+        emotion_dict = test_me(response, api_key)
+        return render_template('test/test.html', response=emotion_dict)
+    else:
+        return render_template('test/test.html')
+
+
+@app.route('/test2', methods=['GET', 'POST'])
+def view_test2():
+    """
+    # spotify artist search
+    :return:
+    """
+    if request.method == 'POST':
+        artist_query = request.form['artist']
+        response = test_me2(artist_query)
+        return render_template('test/test2.html', response=response)
+    else:
+        return render_template('test/test2.html')
 
 if __name__ == '__main__':
     # http://flask.pocoo.org/docs/0.11/config/
