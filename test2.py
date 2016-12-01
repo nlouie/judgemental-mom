@@ -9,10 +9,10 @@
 
 import requests
 
+
 # ------------------ Function --------------------- #
 
 def test_me2(artist):
-
     """
     Takes the artist search query and returns a list of all the artists.
     :param artist: string

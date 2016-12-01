@@ -3,7 +3,7 @@
 {% block head %}
     {{ super() }}
     <style type="text/css">
-        .important { color: #336699; }
+
     </style>
 {% endblock %}
 {% block content %}
@@ -14,32 +14,43 @@
         <h3>Damn that error: {{ result.error.message }}</h3>
     {% endif %} col-md-6 col-md-offset-3">
 
-    <h5>Facebook authentication successful! Check the console for debug output. The access token has been saved in memory.</h5>
+        <h5>Facebook authentication successful! Check the console for debug output. The access token has been saved in
+            memory.</h5>
 
-    {# Welcome the user. #}
-    {% if result.user %}
-        <h3>Hi {{ result.user.name }}</h3>
-        <h5>Your id is: {{ result.user.id }}</h5>
-        <h5>Your email is: {{ result.user.email }}</h5>
-        <h5>Your relationship status is: {{ result.user.relationship_status }}</h5>
-        <h5>Your gender is: {{ result.user.gender }}</h5>
-    {% endif %}
+        {# Welcome the user. #}
+        {% if result.user %}
+            <h3>Hi {{ result.user.name }}</h3>
+            <h5>Your id is: {{ result.user.id }}</h5>
+            <h5>Your email is: {{ result.user.email }}</h5>
+            <h5>Your relationship status is: {{ result.user.relationship_status }}</h5>
+            <h5>Your gender is: {{ result.user.gender }}</h5>
+        {% endif %}
 
-    {% if output %}
-        <h3>Hi {{ output.name }}</h3>
-        <h5>Your id is: {{ output.id }}</h5>
-        <h5>Your email is: {{ output.email }}</h5>
-        <h5>Your relationship status is: {{ output.relationship_status }}</h5>
-        <h5>Your gender is: {{ output.gender }}</h5>
-    {% endif %}
+        {% if output %}
+            <h3>Hi {{ output.name }}</h3>
+            <h5>Your id is: {{ output.id }}</h5>
+            <h5>Your email is: {{ output.email }}</h5>
+            <h5>Your relationship status is: {{ output.relationship_status }}</h5>
+            <h5>Your gender is: {{ output.gender }}</h5>
+        {% endif %}
 
-    {% if playlists_recs %}
+        {% if playlists_recs %}
+            <div class="container col-md-12">
+                <h2>Suggested Playlists</h2>
+                <table class="table">
+                    {% for playlist in playlists_recs.playlists %}
+                        <tr>
+                            <td></td>
+                        </tr>
+                    {% endfor %}
+                </table>
 
-    {% endif %}
+            </div>
+        {% endif %}
 
 
-    {% if session %}
-        {{ session }}
-    {% endif %}
+        {% if session %}
+            {{ session }}
+        {% endif %}
     </div>
 {% endblock %}

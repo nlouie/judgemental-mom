@@ -4,7 +4,7 @@
 {% block head %}
     {{ super() }}
     <style type="text/css">
-        .important { color: #336699; }
+
     </style>
 {% endblock %}
 {% block content %}
@@ -13,7 +13,7 @@
 
     {% if all_users %}
 
-    <div class="container col-md-12">
+        <div class="container col-md-12">
         <table class="table table-bordered">
             <tr>
                 <th>id</th>
@@ -22,22 +22,22 @@
                 <th>fb_oauth_token</th>
             </tr>
             {% for user in all_users %}
-            <tr>
-                <td>{{ user.id }}</td>
-                <td>{{ user.fb_name }}</td>
-                <td>{{ user.fb_email }}</td>
-                <td>{{ user.fb_oauth_token }}</td>
-            </tr>
-    {% endfor %}
+                <tr>
+                    <td>{{ user.id }}</td>
+                    <td>{{ user.fb_name }}</td>
+                    <td>{{ user.fb_email }}</td>
+                    <td>{{ user.fb_oauth_token }}</td>
+                </tr>
+            {% endfor %}
 
         </table>
     {% endif %}
 
 
-        {% if session %}
-        {{ session }}
-        {% endif %}
+{% if session %}
+    {{ session }}
+{% endif %}
 
-    </div>
+</div>
 
 {% endblock %}

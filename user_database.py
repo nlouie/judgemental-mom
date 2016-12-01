@@ -27,6 +27,7 @@ TABLE_SCHEMA = \
     )
     '''
 
+
 # ------------------ Helpers --------------------- #
 
 
@@ -34,6 +35,7 @@ def get_db():
     db = dataset.connect(DB_URL)
     db.query(TABLE_SCHEMA)
     return db
+
 
 # ------------------ Publics --------------------- #
 
@@ -54,8 +56,8 @@ def create_account(fb_oauth_token, fb_name, fb_email):
         return True
     except Exception as e:
         return False
-    
-    # table.update(dict(name='John Doe', age=47), ['name'])
+
+        # table.update(dict(name='John Doe', age=47), ['name'])
 
 
 def refresh_account(fb_oauth_token, fb_name, fb_email):

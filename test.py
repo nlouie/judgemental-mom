@@ -9,21 +9,22 @@
 
 import requests
 
+
 # ------------------ Functions --------------------- #
 
 
 def test_me(s, api_key):
-
     '''
         input s: string of english text 
         input api_key: string api_key for indico
         returns dictionary of emotion values
     '''
 
-    headers ={'X-ApiKey':str(api_key)}
+    headers = {'X-ApiKey': str(api_key)}
     data = {'data': str(s)}
     r = requests.get('https://apiv2.indico.io/emotion/', headers=headers, data=data)
     return r.json()
+
 
 # eof
 

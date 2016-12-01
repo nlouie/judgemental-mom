@@ -9,6 +9,7 @@
 
 from json import load
 
+
 # ------------------ Functions --------------------- #
 
 def load_auth_json():

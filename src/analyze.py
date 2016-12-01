@@ -7,14 +7,12 @@
 
 # --------------- IMPORTS -----------------------------#
 
-import authomatic
-from user_database import add_app_token
-from urllib.parse import urlunparse, urlencode
+from urllib.parse import urlencode
 import requests
 
-from src.spotify import suggest_emotion_playlist
 
 # ------------- FUNCTIONS ----------------------------#
+
 
 def init_output():
     """
@@ -38,6 +36,7 @@ def init_output():
               'gender': ""
               }
     return output
+
 
 def create_fb_request_url(oauth_id):
     """
@@ -180,6 +179,7 @@ def analyze_messages(user_data, indico_api_key, text_analysis_list):
     # print(results)
     return results
 
+
 def analyze(user_data, indico_api_key):
     """
     Analyze the user data
@@ -193,3 +193,4 @@ def analyze(user_data, indico_api_key):
     results['messages'] = analyze_messages(user_data, indico_api_key, text_analysis_list)
     return results
 
+# eof

@@ -14,6 +14,22 @@ import requests
 
 
 def suggest_emotion_playlist(results_emotion):
+    """
+    Suggests a playlist by searching for playlists of that top emotion.
+
+    Expected returned dict:
+    {
+      "playlists": {
+        "href": {"..."},
+        "items": [...],
+        "name": "..."
+
+
+    }
+
+    :param results_emotion: dictionary -indico emotion results
+    :return: dictionary
+    """
     top_mood = max(results_emotion)
     # make the api call
     endpoint = 'https://api.spotify.com/v1/search?q=' + str(top_mood) + '&type=playlist'

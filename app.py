@@ -49,6 +49,7 @@ app.config['INDICO_KEY'] = auth['indico']['api_key']
 # Instantiate Authomatic.
 authomatic = Authomatic(CONFIG, 'your secret string', report_errors=False)
 
+
 # ------------------ Functions ------------------------#
 
 
@@ -59,7 +60,7 @@ def check_auth(username, password):
     password combination is valid.
     """
     return username == auth['flask']['basic_auth_admin_username'] \
-        and password == auth['flask']['basic_auth_admin_password']
+           and password == auth['flask']['basic_auth_admin_password']
 
 
 def authenticate():
@@ -77,7 +78,9 @@ def requires_auth(f):
         if not auth or not check_auth(auth.username, auth.password):
             return authenticate()
         return f(*args, **kwargs)
+
     return decorated
+
 
 # ------------------ Routes --------------------------#
 
@@ -170,20 +173,19 @@ def admin():
     all_users = user_database.select_all_users()
     return render_template('admin.html', all_users=all_users)
 
-# This route will clear the variable sessions
-# This functionality can come handy for example when we logout
-# a user from our app and we want to clear its information
-
 
 @app.route('/clear')
 def clear_session():
     """
-    # Clear the session
+    This route will clear the variable sessions
+    This functionality can come handy for example when we logout
+    a user from our app and we want to clear its information
     :return:
     """
     session.clear()
     # Redirect the user to the main page
     return redirect(url_for('hello_world'))
+
 
 # Examples for assignment 3 or for reference #
 
@@ -225,6 +227,7 @@ def page_not_found(error):
     :return:
     """
     return render_template('404.html')
+
 
 if __name__ == '__main__':
     # http://flask.pocoo.org/docs/0.11/config/
