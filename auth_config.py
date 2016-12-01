@@ -1,11 +1,12 @@
 from authomatic.providers import oauth2, oauth1
+from authomatic import provider_id
 from config import load_auth_json
 
 CONFIG = {
     'fb': {
 
         'class_': oauth2.Facebook,
-        'id': 1,
+        'id': provider_id(),
 
         # Facebook is an AuthorizationProvider too.
         'consumer_key': load_auth_json()['facebook']['app_id'],

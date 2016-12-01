@@ -171,6 +171,8 @@ def login_oauth(provider_name):
     result = authomatic.login(WerkzeugAdapter(request, response), provider_name, session=session,
                               session_saver=lambda: app.save_session(session, response))
 
+
+
     # If there is no LoginResult object, the login procedure is still pending.
     if result:
         if result.user:
