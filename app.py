@@ -9,15 +9,19 @@
 
 # ------------------ Imports --------------------- #
 
-
+# very important
 from flask import Flask, request, render_template, Response, make_response, session, redirect, url_for
 from config import load_auth_json
 
-from auth_config import CONFIG     # for authomatic
+# for authomatic
+from auth_config import CONFIG
 from authomatic import Authomatic
 from authomatic.adapters import WerkzeugAdapter
 
-# JM scripts
+# for basic auth
+from functools import wraps
+
+# --- JM scripts ---#
 
 from src.analyze import analyze, extract_facebook
 from src.register import db_user
@@ -28,8 +32,7 @@ from test import test_me
 from test2 import test_me2
 
 # database
-from user_database import *
-
+import user_database
 
 # ----------------- Init ----------------------------#
 
@@ -47,9 +50,7 @@ authomatic = Authomatic(CONFIG, 'your secret string', report_errors=False)
 # ------------------ Functions ------------------------#
 
 
-############### Basic Authentication Temporary ###################
-
-from functools import wraps
+# --------------- Basic Auth is temporary --------------#
 
 def check_auth(username, password):
     """This function is called to check if a username /
@@ -57,12 +58,14 @@ def check_auth(username, password):
     """
     return username == 'admin' and password == 'secret'
 
+
 def authenticate():
     """Sends a 401 response that enables basic auth"""
     return Response(
     'Could not verify your access level for that URL.\n'
     'You have to login with proper credentials', 401,
     {'WWW-Authenticate': 'Basic realm="Login Required"'})
+
 
 def requires_auth(f):
     @wraps(f)
@@ -75,9 +78,13 @@ def requires_auth(f):
 
 # ------------------ Routes --------------------------#
 
-# index
+
 @app.route('/')
 def hello_world():
+    """
+    Index page
+    :return:
+    """
     # Initialise the counter, or increment it
     return render_template('index.html')
 
@@ -108,7 +115,7 @@ def login_oauth(provider_name):
         user_data = extract_facebook(result)
         # handles user database entry
         db_user(user_data)
-        add_app_token(result.user.id, result.user.credentials)
+        user_database.add_app_token(result.user.id, result.user.credentials)
         analysis = analyze(user_data, app.config['INDICO_KEY'])
         playlists_recs = suggest_emotion_playlist(analysis['messages']['emotion'])
         return render_template('login.html', result=result, output=user_data, playlists_recs=playlists_recs)

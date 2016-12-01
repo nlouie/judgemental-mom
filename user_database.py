@@ -93,6 +93,15 @@ def add_app_token(fb_oauth_token, fb_app_token):
     except Exception as e:
         return False
 
+
+def select_all_users():
+    """
+    SELECT *
+    FROM users
+    :return:
+    """
+    return get_db().all()
+
 # # depreciate this.
 #
 # def is_app_token_valid(fb_oauth_token):
