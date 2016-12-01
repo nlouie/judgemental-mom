@@ -1,0 +1,43 @@
+{# account.html #}
+{% extends "layouts/layout.html" %}
+{% block title %}Account{% endblock %}
+{% block head %}
+    {{ super() }}
+    <style type="text/css">
+        .important { color: #336699; }
+    </style>
+{% endblock %}
+{% block content %}
+    <h1>Admin</h1>
+    <h2>Users</h2>
+
+    {% if all_users %}
+
+    <div class="container col-md-12">
+        <table class="table table-bordered">
+            <tr>
+                <th>id</th>
+                <th>fb_name</th>
+                <th>fb_email</th>
+                <th>fb_oauth_token</th>
+            </tr>
+            {% for user in all_users %}
+            <tr>
+                <td>{{ user.id }}</td>
+                <td>{{ user.fb_name }}</td>
+                <td>{{ user.fb_email }}</td>
+                <td>{{ user.fb_oauth_token }}</td>
+            </tr>
+    {% endfor %}
+
+        </table>
+    {% endif %}
+
+
+        {% if session %}
+        {{ session }}
+        {% endif %}
+
+    </div>
+
+{% endblock %}

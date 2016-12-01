@@ -100,7 +100,7 @@ def select_all_users():
     FROM users
     :return:
     """
-    return get_db().all()
+    return dataset.connect(DB_URL)[TABLE_NAME_USERS].all()
 
 # # depreciate this.
 #

@@ -32,17 +32,19 @@ from test import test_me
 from test2 import test_me2
 
 # database
+
 import user_database
 
 # ----------------- Init ----------------------------#
 
 # initialize flask
 app = Flask(__name__)
-app.secret_key = load_auth_json()['flask']['secret_key']
+auth = load_auth_json()
+app.secret_key = auth['flask']['secret_key']
 app.config['SESSION_TYPE'] = 'filesystem'
 app.config['DEBUG'] = True
-app.config['FB_KEY'] = load_auth_json()['facebook']['app_secret']
-app.config['INDICO_KEY'] = load_auth_json()['indico']['api_key']
+app.config['FB_KEY'] = auth['facebook']['app_secret']
+app.config['INDICO_KEY'] = auth['indico']['api_key']
 
 # Instantiate Authomatic.
 authomatic = Authomatic(CONFIG, 'your secret string', report_errors=False)
@@ -56,15 +58,16 @@ def check_auth(username, password):
     """This function is called to check if a username /
     password combination is valid.
     """
-    return username == 'admin' and password == 'secret'
+    return username == auth['flask']['basic_auth_admin_username'] \
+        and password == auth['flask']['basic_auth_admin_password']
 
 
 def authenticate():
     """Sends a 401 response that enables basic auth"""
     return Response(
-    'Could not verify your access level for that URL.\n'
-    'You have to login with proper credentials', 401,
-    {'WWW-Authenticate': 'Basic realm="Login Required"'})
+        'Could not verify your access level for that URL.\n'
+        'You have to login with proper credentials', 401,
+        {'WWW-Authenticate': 'Basic realm="Login Required"'})
 
 
 def requires_auth(f):
@@ -164,7 +167,8 @@ def admin():
     Admin page
     :return:
     """
-    return render_template('admin.html')
+    all_users = user_database.select_all_users()
+    return render_template('admin.html', all_users=all_users)
 
 # This route will clear the variable sessions
 # This functionality can come handy for example when we logout
@@ -181,7 +185,7 @@ def clear_session():
     # Redirect the user to the main page
     return redirect(url_for('hello_world'))
 
-# Examples for assignment 3 or for reference
+# Examples for assignment 3 or for reference #
 
 
 @app.route('/test', methods=['GET', 'POST'])
@@ -211,6 +215,16 @@ def view_test2():
         return render_template('test/test2.html', response=response)
     else:
         return render_template('test/test2.html')
+
+
+@app.errorhandler(404)
+def page_not_found(error):
+    """
+    http://flask.pocoo.org/docs/0.11/api/
+    :param error:
+    :return:
+    """
+    return render_template('404.html')
 
 if __name__ == '__main__':
     # http://flask.pocoo.org/docs/0.11/config/
