@@ -1,4 +1,4 @@
-from database import *
+from user_database import *
 
 oa = 'oauth1'
 n = 'Corey'

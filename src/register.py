@@ -5,7 +5,7 @@
 # Last updated by nlouie on 11/18/16
 # Description: Handles user registration to database
 
-from database import *
+from user_database import *
 
 
 def db_user(user_data):

@@ -28,7 +28,7 @@ from test import test_me
 from test2 import test_me2
 
 # database
-from database import *
+from user_database import *
 
 
 # ----------------- Init ----------------------------#
@@ -109,6 +109,10 @@ def view_analyze():
 @app.route('/connect')
 def view_connect():
     return render_template('connect.html')
+
+@app.route('/account')
+def view_connect():
+    return render_template('account.html')
 
 # Examples for assignment 3 or for reference
 

@@ -3,7 +3,7 @@
 # CS411 A2 Group 8 Project
 # Created by corey on 11/5/16
 # Last updated by corey on 11/17/16
-# Description:
+# Description: Creates a database
 
 # ------------------ Imports --------------------- #
 
@@ -13,11 +13,11 @@ import dataset
 
 DB_URL = 'sqlite:///data/app.db'
 
-TABLE_NAME = 'users'
+TABLE_NAME_USERS = 'users'
 
 TABLE_SCHEMA = \
     '''
-    CREATE TABLE IF NOT EXISTS ''' + TABLE_NAME + '''
+    CREATE TABLE IF NOT EXISTS ''' + TABLE_NAME_USERS + '''
     (
         id INTEGER PRIMARY KEY AUTOINCREMENT,
         fb_name VARCHAR(255) NOT NULL,
@@ -37,10 +37,16 @@ def get_db():
 
 # ------------------ Publics --------------------- #
 
-
 def create_account(fb_oauth_token, fb_name, fb_email):
+    """
+    Insert account
+    :param fb_oauth_token:
+    :param fb_name:
+    :param fb_email:
+    :return:
+    """
     db = get_db()
-    tb = db[TABLE_NAME]
+    tb = db[TABLE_NAME_USERS]
     try:
         tb.insert(dict(fb_name=fb_name,
                        fb_email=fb_email,
@@ -53,8 +59,15 @@ def create_account(fb_oauth_token, fb_name, fb_email):
 
 
 def refresh_account(fb_oauth_token, fb_name, fb_email):
+    """
+    Update account
+    :param fb_oauth_token: str
+    :param fb_name: str
+    :param fb_email: str
+    :return:
+    """
     db = get_db()
-    tb = db[TABLE_NAME]
+    tb = db[TABLE_NAME_USERS]
     try:
         tb.update(dict(fb_name=fb_name,
                        fb_email=fb_email,
@@ -65,8 +78,14 @@ def refresh_account(fb_oauth_token, fb_name, fb_email):
 
 
 def add_app_token(fb_oauth_token, fb_app_token):
+    """
+    Add the oauth token.
+    :param fb_oauth_token: str
+    :param fb_app_token: str
+    :return:
+    """
     db = get_db()
-    tb = db[TABLE_NAME]
+    tb = db[TABLE_NAME_USERS]
     try:
         tb.update(dict(fb_app_token=fb_app_token,
                        fb_oauth_token=fb_oauth_token), ['fb_oauth_token'])

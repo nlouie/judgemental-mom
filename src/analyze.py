@@ -8,7 +8,7 @@
 # --------------- IMPORTS -----------------------------#
 
 import authomatic
-from database import add_app_token
+from user_database import add_app_token
 from urllib.parse import urlunparse, urlencode
 import requests
 
