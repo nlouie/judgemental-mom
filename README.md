@@ -62,12 +62,7 @@ I suggest using PyCharm and when setting the interpreter, create a new virtual e
 
 ### Set up your database
 
-We use a sqllite3 database. Within the project folder create a file named "app.db"
-
-```
-$ cd judgemental-mom/data
-$ touch app.db
-```
+We use a sqllite3 database, located in the `data` directory.
 
 ## Running the Package
 
