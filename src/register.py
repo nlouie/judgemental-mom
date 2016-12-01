@@ -16,7 +16,6 @@ def db_user(user_data):
     user_exists = not create_account(user_data['oauth_id'],
                                      user_data['name'],
                                      user_data['email'])
-
     if user_exists:
         # in case email or name changed
         refresh_account(user_data['oauth_id'],
@@ -28,5 +27,6 @@ def db_user(user_data):
         # do whatever you want here
         # user is already created once you get here
         pass
+    increment_num_uses(user_data['oauth_id'])
 
 # eof

@@ -2,7 +2,7 @@
 # Judgemental Mom
 # CS411 A2 Group 8 Project
 # Created by corey on 11/5/16
-# Last updated by corey on 11/17/16
+# Last updated by nlouie on 12/01/16
 # Description: Creates a database
 
 # ------------------ Imports --------------------- #
@@ -23,8 +23,9 @@ TABLE_SCHEMA = \
         fb_name VARCHAR(255) NOT NULL,
         fb_email VARCHAR(255) NOT NULL UNIQUE,
         fb_oauth_token VARCHAR(255) NOT NULL UNIQUE,
-        fb_app_token VARCHAR(255)
-    )
+        fb_app_token VARCHAR(255),
+        num_uses INTEGER NOT NULL DEFAULT 0
+    );
     '''
 
 
@@ -99,17 +100,27 @@ def add_app_token(fb_oauth_token, fb_app_token):
 def select_all_users():
     """
     SELECT *
-    FROM users
+    FROM users;
     :return:
     """
     return dataset.connect(DB_URL)[TABLE_NAME_USERS].all()
 
-# # depreciate this.
-#
-# def is_app_token_valid(fb_oauth_token):
-#     db = get_db()
-#     tb = db[TABLE_NAME]
-#     try:
-#         return bool(tb.find_one(fb_oauth_token=fb_oauth_token)['fb_app_token_fresh'])
-#     except Exception as e:
-#         print(e)
+
+def increment_num_uses(fb_oauth_token):
+    """
+    UPDATE users
+    SET num_uses = num_uses + 1
+    WHERE oauth_id = fb_oauth_token
+    :param fb_oauth_token:
+    :return:
+    """
+    db = get_db()
+    tb = db[TABLE_NAME_USERS]
+    user = tb.find_one(fb_oauth_token=fb_oauth_token)
+    user_num_uses = user['num_uses']
+    try:
+        tb.update(dict(fb_oauth_token=fb_oauth_token,
+                       num_uses=user_num_uses + 1), ['fb_oauth_token'])
+        return True
+    except Exception as e:
+        return False

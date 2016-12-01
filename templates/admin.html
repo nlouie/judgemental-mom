@@ -20,6 +20,7 @@
                 <th>fb_name</th>
                 <th>fb_email</th>
                 <th>fb_oauth_token</th>
+                <th>num_uses</th>
             </tr>
             {% for user in all_users %}
                 <tr>
@@ -27,6 +28,7 @@
                     <td>{{ user.fb_name }}</td>
                     <td>{{ user.fb_email }}</td>
                     <td>{{ user.fb_oauth_token }}</td>
+                    <td>{{ user.num_uses }}</td>
                 </tr>
             {% endfor %}
 

@@ -28,11 +28,10 @@ def test_me(s, api_key):
 
 # eof
 
-
-import user_database
+#
+# import user_database
 #
 # db = user_database.get_db()
-# user_database.create_account('1234', 'bob', 'bob@bon.com')
-# all_users = user_database.select_all_users()
-# for user in all_users:
-#     print(user)
+# user = db['users'].find_one(fb_oauth_token = 10211127960812688)
+# db['users'].update(dict(num_uses=user['num_uses'] + 1, fb_oauth_token=10211127960812688),  ['fb_oauth_token'])
+#

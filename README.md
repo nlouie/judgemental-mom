@@ -34,8 +34,6 @@ Our first trick is to analyze a user's Facebook data and suggest playlists to ma
 
 ### Front End
 - [Bootstrap](http://getbootstrap.com/)
-- [Angular](https://angularjs.org/) (not implemented yet)
-- [Sass](http://sass-lang.com/libsass) (not implemented yet)
 
 ### External APIs
 - [Indico](https://indico.io)
@@ -114,14 +112,17 @@ $ touch app.db
 
 ### Required functionality
 
-- [ ] Setup database with dataset (sqllite3)
+- [x] Setup database with dataset (sqllite3)
 - [ ] Login / logout functionality (research packages for Flask)
-- [ ] Connect social Media with `connect.py` and `connect.html`
-- [ ] Gather facebook data with `collect_facebook_.py`
-- [ ] Analyze and display facebook data with `analyze.py` and `analyze.html` using Indico
+- [x] Connect social Media
+- [x] Gather facebook data with `collect_facebook_.py`
+- [x] Analyze and display facebook data with `analyze.py` and `analyze.html` using Indico
 - [ ] Make the UI look pretty
 
 ### Optional functionality
-- [ ] Login with Facebook
+- [x] Login with Facebook
 - [ ] Connect your Spotify
 
+### Future Enhancements
+- [Angular](https://angularjs.org/) (not implemented yet)
+- [Sass](http://sass-lang.com/libsass) (not implemented yet)

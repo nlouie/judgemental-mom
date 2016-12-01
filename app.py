@@ -39,15 +39,15 @@ import user_database
 
 # initialize flask
 app = Flask(__name__)
-auth = load_auth_json()
-app.secret_key = auth['flask']['secret_key']
+auth_keys = load_auth_json()
+app.secret_key = auth_keys['flask']['secret_key']
 app.config['SESSION_TYPE'] = 'filesystem'
 app.config['DEBUG'] = True
-app.config['FB_KEY'] = auth['facebook']['app_secret']
-app.config['INDICO_KEY'] = auth['indico']['api_key']
+app.config['FB_KEY'] = auth_keys['facebook']['app_secret']
+app.config['INDICO_KEY'] = auth_keys['indico']['api_key']
 
 # Instantiate Authomatic.
-authomatic = Authomatic(CONFIG, auth['flask']['secret_key'], report_errors=False)
+authomatic = Authomatic(CONFIG, auth_keys['flask']['secret_key'], report_errors=False)
 
 
 # ------------------ Functions ------------------------#
@@ -59,8 +59,8 @@ def check_auth(username, password):
     """This function is called to check if a username /
     password combination is valid.
     """
-    return username == auth['flask']['basic_auth_admin_username'] \
-           and password == auth['flask']['basic_auth_admin_password']
+    return username == auth_keys['flask']['basic_auth_admin_username'] \
+           and password == auth_keys['flask']['basic_auth_admin_password']
 
 
 def authenticate():
@@ -201,7 +201,7 @@ def view_test():
     :return:
     """
     if request.method == 'POST':
-        api_key = auth['indico']['api_key']
+        api_key = app.config['INDICO_KEY']
         response = request.form['input']
         emotion_dict = test_me(response, api_key)
         return render_template('test/test.html', response=emotion_dict)
