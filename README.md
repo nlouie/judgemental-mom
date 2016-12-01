@@ -1,6 +1,6 @@
 # [Judgemental Mom](https://judgementalmom.com)
 ### [Boston University Department of Computer Science](http://www.bu.edu/cs/)
-#### [CS411 A2 Software Engineering](http://sites.bu.edu/perryd/cs411-software-engineering/)Fall 2016
+#### [CS411 A2 Software Engineering](http://sites.bu.edu/perryd/cs411-software-engineering/) Fall 2016
 ##### Created by nlouie on 10/6/16
 ##### Last updated by nlouie on 11/16/16
 ##### https://judgementalmom.com
@@ -62,6 +62,14 @@ I suggest using PyCharm and when setting the interpreter, create a new virtual e
 ```$ pip install authomatic```
 ```$ pip install datasets```
 
+### Set up your database
+
+We use a sqllite3 database. Within the project folder create a file named "app.db"
+
+```
+$ cd judgemental-mom/data
+$ touch app.db
+```
 
 ## Running the Package
 
