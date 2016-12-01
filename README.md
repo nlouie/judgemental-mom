@@ -2,7 +2,7 @@
 ### [Boston University Department of Computer Science](http://www.bu.edu/cs/)
 #### [CS411 A2 Software Engineering](http://sites.bu.edu/perryd/cs411-software-engineering/) Fall 2016
 ##### Created by nlouie on 10/6/16
-##### Last updated by nlouie on 11/16/16
+##### Last updated by nlouie on 12/01/16
 ##### https://judgementalmom.com
 
 ### Group 8 Team Members
@@ -62,7 +62,7 @@ I suggest using PyCharm and when setting the interpreter, create a new virtual e
 
 ### Set up your database
 
-We use a sqllite3 database, located in the `data` directory.
+We use a sqlite3 database, located in the `data` directory.
 
 ## Running the Package
 

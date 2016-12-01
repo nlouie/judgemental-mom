@@ -38,6 +38,12 @@ def get_db():
     return db
 
 
+def get_table(table_name):
+    db = get_db()
+    tb = db[table_name]
+    return tb
+
+
 # ------------------ Publics --------------------- #
 
 def create_account(fb_oauth_token, fb_name, fb_email):
@@ -124,3 +130,17 @@ def increment_num_uses(fb_oauth_token):
         return True
     except Exception as e:
         return False
+
+
+def get_user(fb_oauth_token):
+    """
+    Returns the user with the matching token
+    :param fb_oauth_token:
+    :return:
+    """
+    db = get_db()
+    tb = db[TABLE_NAME_USERS]
+    user = tb.find_one(fb_oauth_token=fb_oauth_token)
+    return user
+
+# eof

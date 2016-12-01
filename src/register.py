@@ -2,7 +2,7 @@
 # Judgemental Mom
 # CS411 A2 Group 8 Project
 # Created by nlouie on 11/12/16
-# Last updated by nlouie on 11/18/16
+# Last updated by nlouie on 12/01/16
 # Description: Handles user registration to database
 
 from user_database import *
@@ -28,5 +28,6 @@ def db_user(user_data):
         # user is already created once you get here
         pass
     increment_num_uses(user_data['oauth_id'])
+
 
 # eof

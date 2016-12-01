@@ -2,7 +2,7 @@
 # Judgemental Mom
 # CS411 A2 Group 8 Project
 # Created by nlouie on 11/17/16
-# Last updated by nlouie on 11/25/16
+# Last updated by nlouie on 12/01/16
 # Description: Extracts fb analysis response data, analyzes the data.
 
 # --------------- IMPORTS -----------------------------#
@@ -160,10 +160,8 @@ def analyze_messages(user_data, indico_api_key, text_analysis_list):
     """
     results = {}
     posts_data = user_data.get('posts_data')
-    # print(posts_data)
     messages = extract_messages_from_posts(posts_data)
-    # print('messages', messages)
-    if len(messages) < 1:
+    if len(messages) <= 1:
         results['error'] = "Not enough data"
     else:
         # set up indicio request
@@ -176,7 +174,6 @@ def analyze_messages(user_data, indico_api_key, text_analysis_list):
             url = 'https://apiv2.indico.io/{0}/'.format(str(text_analysis))
             r = requests.get(url, headers=headers, data=data)
             results[str(text_analysis)] = r.json()
-    # print(results)
     return results
 
 

@@ -2,7 +2,7 @@
 # Judgemental Mom
 # CS411 A2 Group 8 Project
 # Created by nlouie on 11/25/16
-# Last updated by nlouie on 11/25/16
+# Last updated by nlouie on 12/01/16
 # Description: Makes spotify requests. see test2/ for example.
 # Resources:
 #           https://developer.spotify.com/web-api/get-category/
@@ -27,7 +27,7 @@ def suggest_emotion_playlist(results_emotion):
 
     }
 
-    :param results_emotion: dictionary -indico emotion results
+    :param results_emotion: dictionary - indico emotion results
     :return: dictionary
     """
     top_mood = max(results_emotion)

@@ -2,7 +2,7 @@
 # Judgemental Mom
 # CS411 A2 Group 8 Project
 # Created by nlouie on 11/1/16
-# Last updated by nlouie on 11/6/16
+# Last updated by nlouie on 12/01/16
 # Description: This is the main app script. Run me to start the server!
 #              Initializes the web app and sets up views (routes)
 
