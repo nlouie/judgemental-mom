@@ -8,13 +8,16 @@
 # ------------------ Imports --------------------- #
 
 import dataset
+import sqlalchemy
 
 # ------------------ Params ---------------------- #
 
 DB_URL = 'sqlite:///data/app.db'
 
 TABLE_NAME_USERS = 'users'
+TABLE_NAME_TEST = 'test'
 
+# this is bad security
 TABLE_SCHEMA = \
     '''
     CREATE TABLE IF NOT EXISTS ''' + TABLE_NAME_USERS + '''
@@ -28,6 +31,26 @@ TABLE_SCHEMA = \
     );
     '''
 
+
+def gen_test_table():
+    """
+    Currently not working and in development!
+    Properly creating a table with dataset / sqlalchemy but it's currently not working :(
+    http://docs.sqlalchemy.org/en/rel_1_1/core/metadata.html?highlight=autoincrement#sqlalchemy.schema.Column.params.autoincrement
+    Same functionality as
+
+        CREATE TABLE IF NOT EXISTS ''' + TABLE_NAME_USERS + '''
+    (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        fb_name VARCHAR(255) NOT NULL,
+        fb_email VARCHAR(255) NOT NULL UNIQUE,
+        fb_oauth_token VARCHAR(255) NOT NULL UNIQUE,
+        fb_app_token VARCHAR(255),
+        num_uses INTEGER NOT NULL DEFAULT 0
+    );
+
+    :return:
+    """
 
 # ------------------ Helpers --------------------- #
 
@@ -43,6 +66,14 @@ def get_table(table_name):
     tb = db[table_name]
     return tb
 
+
+def drop_table(table_name):
+    try :
+        db = get_db()
+        result = db[table_name].drop()
+        return result
+    except Exception as e:
+        return False
 
 # ------------------ Publics --------------------- #
 
@@ -124,6 +155,7 @@ def increment_num_uses(fb_oauth_token):
     tb = db[TABLE_NAME_USERS]
     user = tb.find_one(fb_oauth_token=fb_oauth_token)
     user_num_uses = user['num_uses']
+    # bug ^
     try:
         tb.update(dict(fb_oauth_token=fb_oauth_token,
                        num_uses=user_num_uses + 1), ['fb_oauth_token'])
