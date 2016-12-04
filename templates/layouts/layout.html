@@ -39,6 +39,15 @@
     {% endblock %}
 </head>
 <body>
+<style>
+    #logo {
+        height: 35px;
+        margin-top: -10px;
+        width:  auto;
+    }
+
+
+</style>
 
 <div class="site-wrapper">
 
@@ -48,10 +57,10 @@
 
             <div class="masthead clearfix">
                 <div class="inner">
-                    <h3 class="masthead-brand"><a href="/">JudgementalMom.com</a></h3>
+                    <h3 class="masthead-brand"><a href="/"><img src="{{ url_for('static', filename='img/logo.png') }}" id="logo"></a></h3>
                     <nav>
                         <ul class="nav masthead-nav">
-                            <li class="active"><a href="#">Home</a></li>
+                            <li class="active"><a href="/">Home</a></li>
                             <li><a href="{{ url_for('view_about') }}">About</a></li>
                             <li><a href="{{ url_for('view_admin') }}">Admin</a></li>
                         </ul>
