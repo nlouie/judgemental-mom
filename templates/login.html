@@ -13,18 +13,6 @@
             <h3>Damn that error: {{ result.error.message }}</h3>
         {% endif %}
 
-        <h5>Facebook authentication successful! Check the console for debug output. The access token has been saved in
-            memory.</h5>
-
-        {# Welcome the user. #}
-{#        {% if result.user %}#}
-{#            <h3>Hi {{ result.user.name }}</h3>#}
-{#            <h5>Your id is: {{ result.user.id }}</h5>#}
-{#            <h5>Your email is: {{ result.user.email }}</h5>#}
-{#            <h5>Your relationship status is: {{ result.user.relationship_status }}</h5>#}
-{#            <h5>Your gender is: {{ result.user.gender }}</h5>#}
-{#        {% endif %}#}
-
         {% if output %}
             <h3>Hi {{ output.name }}</h3>
             <h5>Your id is: {{ output.oauth_id }}</h5>
@@ -39,27 +27,33 @@
             {%  endif %}
 
         {% if playlists_recs %}
-            <div class="container">
+            <div class="container col-md-6">
                 <h2>Suggested Playlists</h2>
                 <table class="table">
-{#                    {% for playlist in playlists_recs.playlists.items %}#}
-{#                        <tr>#}
-{#                            <th>Name</th>#}
-{#                            <th>Image</th>#}
-{#                        </tr>#}
-{#                        <tr>#}
-{#                            <td><a href="{{ playlist.href }}">{{ playlist.name }}</a></td>#}
-{#                        </tr>#}
-{#                    {% endfor %}#}
-                    {{ playlists_recs }}
-                </table>
+                    {% for playlist in playlists_recs['playlists']['items'] %}
+                        <tr>
+                            <th>Name</th>
+                            <th>Image</th>
+                        </tr>
+                        <tr>
+                            <td><h4><a href="{{ playlist.href }}">{{ playlist.name }}</a></h4></td>
+                            <td>
+                                <div class="playlist-image-container">
+                                    <a href="{{ playlist['images'][1]['url'] }}">
+                                    <img src="{{ playlist['images'][1]['url'] }}" width="300">
+                                    </a>
+                                </div>
 
+                        </tr>
+                    {% endfor %}
+
+                </table>
+{#            {{ playlists_recs }}#}
             </div>
         {% endif %}
 
-
-        {% if session %}
-            {{ session }}
-        {% endif %}
+{#        {% if session %}#}
+{#            {{ session }}#}
+{#        {% endif %}#}
     </div>
 {% endblock %}

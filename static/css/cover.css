@@ -145,6 +145,7 @@ body {
   /* Pull out the header and footer */
   .masthead {
     position: fixed;
+    z-index: 99;
     top: 0;
   }
   .mastfoot {
@@ -173,4 +174,8 @@ body {
 
 .link {
     color: #2aabd2;
+}
+
+.content{
+  z-index: 0;
 }
