@@ -7,50 +7,66 @@
 {% block content %}
 
 
-    <div class="container col-md-6 col-md-offset-3" id="login-container">        {# Check for errors. #}
-        <h1>Login</h1>
-        {% if result.error %}
-            <h3>Damn that error: {{ result.error.message }}</h3>
-        {% endif %}
+        <!-- Page Content -->
 
-        {% if output %}
-            <h3>Hi {{ output.name }}</h3>
-            <h5>Your id is: {{ output.oauth_id }}</h5>
-            <h5>Your email is: {{ output.email }}</h5>
-            <h5>Your relationship status is: {{ output.relationship_status }}</h5>
-            <h5>Your gender is: {{ output.gender }}</h5>
-        {% endif %}
+	<a  name="login"></a>
+    <div class="content-section-login">
 
-            <h3>Facebook Posts Analysis</h3>
-            {% if top_mood %}
-                <h5>Top mood: {{ top_mood }}</h5>
-            {%  endif %}
+        <div class="container page-container">
+            <div class="row">
+                <h1>Login</h1>
+                {% if result.error %}
+                    <h3>Damn that error: {{ result.error.message }}</h3>
+                {% endif %}
 
-        {% if playlists_recs %}
-            <div class="container col-md-6">
-                <h2>Suggested Playlists</h2>
-                <table class="table">
-                    {% for playlist in playlists_recs['playlists']['items'] %}
-                        <tr>
-                            <th>Name</th>
-                            <th>Image</th>
-                        </tr>
-                        <tr>
-                            <td><h4><a href="{{ playlist.href }}">{{ playlist.name }}</a></h4></td>
-                            <td>
-                                <div class="playlist-image-container">
-                                    <a href="{{ playlist['images'][1]['url'] }}">
-                                    <img src="{{ playlist['images'][1]['url'] }}" width="300">
-                                    </a>
-                                </div>
+                {% if output %}
+                    <h3>Hi {{ output.name }}</h3>
+                    <h5>Your id is: {{ output.oauth_id }}</h5>
+                    <h5>Your email is: {{ output.email }}</h5>
+                    <h5>Your relationship status is: {{ output.relationship_status }}</h5>
+                    <h5>Your gender is: {{ output.gender }}</h5>
+                {% endif %}
 
-                        </tr>
-                    {% endfor %}
+                    <h3>Facebook Posts Analysis</h3>
+                    {% if top_mood %}
+                        <h5>Top mood: {{ top_mood }}</h5>
+                    {%  endif %}
 
-                </table>
-{#            {{ playlists_recs }}#}
+                {% if playlists_recs %}
+                    <div class="container col-md-6">
+                        <h2>Suggested Playlists</h2>
+                        <table class="table">
+                            {% for playlist in playlists_recs['playlists']['items'] %}
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Image</th>
+                                </tr>
+                                <tr>
+                                    <td><h4><a href="{{ playlist.uri }}">{{ playlist.name }}</a></h4></td>
+                                    <td>
+                                        <div class="playlist-image-container">
+                                            <a href="{{ playlist['images'][0]['url'] }}">
+                                            <img src="{{ playlist['images'][0]['url'] }}" width="100">
+                                            </a>
+                                        </div>
+
+                                </tr>
+                            {% endfor %}
+
+                        </table>
+        {#            {{ playlists_recs }}#}
+                    </div>
+                {% endif %}
             </div>
-        {% endif %}
+        </div>
+        <!-- /.container -->
+
+    </div>
+    <!-- /.content-section-login -->
+
+
+    <div class="container col-md-6 col-md-offset-3" id="login-container">        {# Check for errors. #}
+
 
 {#        {% if session %}#}
 {#            {{ session }}#}
