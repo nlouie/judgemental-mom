@@ -68,6 +68,11 @@
                     <li>
                         <a href="{{ url_for('view_admin') }}">Admin</a>
                     </li>
+                    {% if session %}
+                    <li>
+                        <a href="{{ url_for('clear_session') }}">Logout</a>
+                    </li>
+                    {% endif %}
                 </ul>
             </div>
             <!-- /.navbar-collapse -->
