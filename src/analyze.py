@@ -2,7 +2,7 @@
 # Judgemental Mom
 # CS411 A2 Group 8 Project
 # Created by nlouie on 11/17/16
-# Last updated by nlouie on 12/01/16
+# Last updated by nlouie on 12/05/16
 # Description: Extracts fb analysis response data, analyzes the data.
 
 # --------------- IMPORTS -----------------------------#
@@ -186,7 +186,7 @@ def analyze(user_data, indico_api_key):
     """
     results = {}
     # Analyze messages
-    text_analysis_list = ['emotion', 'political']
+    text_analysis_list = ['emotion', 'political', 'personality']
     results['messages'] = analyze_messages(user_data, indico_api_key, text_analysis_list)
     return results
 

@@ -77,6 +77,7 @@ def drop_table(table_name):
 
 # ------------------ Publics --------------------- #
 
+
 def create_account(fb_oauth_token, fb_name, fb_email):
     """
     Insert account

@@ -12,7 +12,7 @@
 
         <div class="container page-container">
             <div class="row">
-                <h1>Login</h1>
+                <h1>Your Judgemental Mom Results</h1>
                 {% if result.error %}
                     <h3>Damn that error: {{ result.error.message }}</h3>
                 {% endif %}
@@ -25,14 +25,27 @@
                     <h5>Your gender is: {{ output.gender }}</h5>
                 {% endif %}
 
-                    <h3>Facebook Posts Analysis</h3>
-                    {% if top_mood %}
-                        <h5>Top mood: {{ top_mood }}</h5>
-                    {%  endif %}
+                <h3>Facebook Posts Analysis</h3>
+
+                {% if output.top_mood %}
+                    <h4>Emotion Analysis </h4>
+                    <p>Based on your last <em>100</em> Facebook posts, your top mood is: <strong>{{ output.top_mood }}</strong></p>
+                {%  endif %}
+
+                {% if output.top_political %}
+                    <h4>Political Analysis</h4>
+                    <p>Based on your last <em>100</em> Facebook posts, your top political leaning is: <strong>{{ output.top_political }}</strong></p>
+                {% endif %}
+
+                {% if output.top_personality %}
+                    <h4>Personality Analysis</h4>
+                    <p>Based on your last <em>100</em> Facebook posts, your top personality is: <strong>{{ output.top_personality }}</strong></p>
+                {% endif %}
 
                 {% if playlists_recs %}
                     <div class="container col-md-6">
                         <h2>Suggested Playlists</h2>
+                        <p>Maybe you would care for some {{ output.top_mood }} music?</p>
                         <table class="table">
                             {% for playlist in playlists_recs['playlists']['items'] %}
                                 <tr>
@@ -52,7 +65,6 @@
                             {% endfor %}
 
                         </table>
-        {#            {{ playlists_recs }}#}
                     </div>
                 {% endif %}
             </div>

@@ -2,7 +2,7 @@
 # Judgemental Mom
 # CS411 A2 Group 8 Project
 # Created by nlouie on 11/1/16
-# Last updated by nlouie on 12/01/16
+# Last updated by nlouie on 12/05/16
 # Description: This is the main app script. Run me to start the server!
 #              Initializes the web app and sets up views (routes)
 
@@ -171,8 +171,6 @@ def login_oauth(provider_name):
     result = authomatic.login(WerkzeugAdapter(request, response), provider_name, session=session,
                               session_saver=lambda: app.save_session(session, response))
 
-
-
     # If there is no LoginResult object, the login procedure is still pending.
     if result:
         if result.user:
@@ -184,10 +182,22 @@ def login_oauth(provider_name):
         db_user(user_data)
         user_database.add_app_token(result.user.id, result.user.credentials)
         analysis = analyze(user_data, app.config['INDICO_KEY'])
-        print(analysis['messages']['emotion'])
-        playlists_recs, top_mood = suggest_emotion_playlist(analysis['messages']['emotion']['results'])
-        return render_template('login.html', result=result, output=user_data, playlists_recs=playlists_recs,
-                               top_mood=top_mood)
+
+        playlists_recs, user_data['top_mood'] = suggest_emotion_playlist(analysis['messages']['emotion']['results'])
+
+        user_data['results_political'] = analysis['messages']['political']['results']
+        user_data['top_political'] = max(
+                                         user_data['results_political'],
+                                         key=lambda i: user_data['results_political'][i]
+                                         )
+
+        user_data['results_personality'] = analysis['messages']['personality']['results']
+        user_data['top_personality'] = max(
+                                           user_data['results_personality'],
+                                           key=lambda i: user_data['results_personality'][i]
+                                           )
+
+        return render_template('login.html', result=result, output=user_data, playlists_recs=playlists_recs)
 
     # Don't forget to return the response.
     return response

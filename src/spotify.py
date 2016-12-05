@@ -12,6 +12,7 @@
 
 import requests
 
+
 def suggest_emotion_playlist(results_emotion):
     """
     Suggests a playlist by searching for playlists of that top emotion.
