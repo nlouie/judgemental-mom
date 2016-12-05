@@ -6,27 +6,52 @@
     <link href="{{ url_for('static', filename='css/about.css') }}" rel="stylesheet">
 {% endblock %}
 {% block content %}
-    <div class="container col-md-12" id="about-container">
-        <h1>About us</h1>
-        <p>Judgemental Mom is your anti-social-media-analyzer. Simply sign in with your Facebook and get judged!</p>
+    <!-- Page Content -->
 
-        <p><a href="https://github.com/nlouie/judgemental-mom">Fork Judgemental Mom on Github!</a></p>
+    <a  name="about"></a>
+    <div class="content-section-about">
 
-        <h3> Judgemental Mom is an organic, gluten free, non-GMO product. </h3>
+        <div class="container page-container">
+            <div class="row">
+                <h1>About us</h1>
+                <p>Judgemental Mom is your anti-social-media-analyzer. Simply sign in with your Facebook and get judged!</p>
 
-        <div>
-            <h2>Privacy</h2>
-            <p>
-                Judgemental Mom stores some information about you after you sign in with Facebook.
-                Currently we store your name, oauth id, and email. We don't have plans on storing your analysis results.
-            </p>
+                <p><a href="https://github.com/nlouie/judgemental-mom">Fork Judgemental Mom on Github!</a></p>
+
+                <h3> Judgemental Mom is an organic, gluten free, non-GMO product. </h3>
+            </div>
 
         </div>
+        <!-- /.container -->
 
-        <div>
-            <h2>Contact</h2>
-            <h4>Please send all hate mail to:</h4>
-            <address><a class="link" href="mailto:admin@judgementalmom.com">admin@judgementalmom.com</a></address>
-        </div>
     </div>
+    <!-- /.content-section-about -->
+
+    <a  name="privacy"></a>
+    <div class="content-section-about">
+
+        <div class="container">
+            <div class="row">
+                <h2>Privacy</h2>
+                <p>
+                    Judgemental Mom stores some information about you after you sign in with Facebook.
+                    Currently we store your name, oauth id, and email. We don't have plans on storing your analysis results.
+                </p>
+            </div>
+        </div>
+        <!-- /.container -->
+    </div>
+    <!-- /.content-section-privacy -->
+
+    <div class="content-section-contact">
+        <div class="container">
+            <div class="row">
+               <h2>Contact</h2>
+               <h4>Please send all hate mail to:</h4>
+               <address><a class="link" href="mailto:admin@judgementalmom.com">admin@judgementalmom.com</a></address>
+            </div>
+        </div>
+        <!-- /.container -->
+    </div>
+    <!-- /.content-section-contact -->
 {% endblock %}
