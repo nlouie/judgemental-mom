@@ -36,11 +36,11 @@
                             <th>Image</th>
                         </tr>
                         <tr>
-                            <td><h4><a href="{{ playlist.href }}">{{ playlist.name }}</a></h4></td>
+                            <td><h4><a href="{{ playlist.uri }}">{{ playlist.name }}</a></h4></td>
                             <td>
                                 <div class="playlist-image-container">
-                                    <a href="{{ playlist['images'][1]['url'] }}">
-                                    <img src="{{ playlist['images'][1]['url'] }}" width="300">
+                                    <a href="{{ playlist['images'][0]['url'] }}">
+                                    <img src="{{ playlist['images'][0]['url'] }}" width="300">
                                     </a>
                                 </div>
 
