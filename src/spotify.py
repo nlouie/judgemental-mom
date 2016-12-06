@@ -13,7 +13,7 @@
 import requests
 
 
-def suggest_emotion_playlist(results_emotion):
+def suggest_emotion_playlist(top_mood):
     """
     Suggests a playlist by searching for playlists of that top emotion.
 
@@ -24,14 +24,11 @@ def suggest_emotion_playlist(results_emotion):
         "items": [...],
         "name": "..."
 
-
     }
 
-    :param results_emotion: dictionary - indico emotion results
+    :param top_mood: str
     :return: dictionary
     """
-    top_mood = max(results_emotion, key=lambda i: results_emotion[i])
-    print(top_mood)
     # make the api call
     endpoint = 'https://api.spotify.com/v1/search?q=' + str(top_mood) + '&type=playlist&limit=10'
     req = requests.get(endpoint)
@@ -39,7 +36,7 @@ def suggest_emotion_playlist(results_emotion):
     if req.status_code == 200:
         # convert to json
         r_dict = req.json()
-        return r_dict, top_mood
+        return r_dict
     else:
         return {'error': {'message': 'problem with request'}}
 

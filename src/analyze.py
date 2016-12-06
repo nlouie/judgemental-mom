@@ -177,9 +177,26 @@ def analyze_messages(user_data, indico_api_key, text_analysis_list):
     return results
 
 
+def extract_tops(analysis, text_analysis_list):
+    """
+    Extract max values of dict in message text analysis
+    :param analysis: dict from analyze()
+    :param text_analysis_list: list from analyze()
+    :return: dict
+    """
+    results = {}
+    for text_analysis in text_analysis_list:
+        analysis_results = analysis[str(text_analysis)]['results']
+        results[text_analysis] = max(
+                                    analysis_results,
+                                    key=lambda i: analysis_results[i]
+                                    )
+    return results
+
+
 def analyze(user_data, indico_api_key):
     """
-    Analyze the user data
+    Analyze the user data. First function.
     :param user_data: dict, user_data extracted
     :param indico_api_key: str
     :return:
@@ -188,6 +205,8 @@ def analyze(user_data, indico_api_key):
     # Analyze messages
     text_analysis_list = ['emotion', 'political', 'personality']
     results['messages'] = analyze_messages(user_data, indico_api_key, text_analysis_list)
+    results['tops'] = extract_tops(results['messages'], text_analysis_list)
+    print(results)
     return results
 
 # eof

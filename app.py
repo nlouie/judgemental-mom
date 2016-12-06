@@ -182,20 +182,8 @@ def login_oauth(provider_name):
         db_user(user_data)
         user_database.add_app_token(result.user.id, result.user.credentials)
         analysis = analyze(user_data, app.config['INDICO_KEY'])
-
-        playlists_recs, user_data['top_mood'] = suggest_emotion_playlist(analysis['messages']['emotion']['results'])
-
-        user_data['results_political'] = analysis['messages']['political']['results']
-        user_data['top_political'] = max(
-                                         user_data['results_political'],
-                                         key=lambda i: user_data['results_political'][i]
-                                         )
-
-        user_data['results_personality'] = analysis['messages']['personality']['results']
-        user_data['top_personality'] = max(
-                                           user_data['results_personality'],
-                                           key=lambda i: user_data['results_personality'][i]
-                                           )
+        user_data['analysis'] = analysis
+        playlists_recs = suggest_emotion_playlist(analysis['tops']['emotion'])
 
         return render_template('login.html', result=result, output=user_data, playlists_recs=playlists_recs)
 
