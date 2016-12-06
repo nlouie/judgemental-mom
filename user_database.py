@@ -47,6 +47,7 @@ def gen_test_table():
         fb_oauth_token VARCHAR(255) NOT NULL UNIQUE,
         fb_app_token VARCHAR(255),
         num_uses INTEGER NOT NULL DEFAULT 0
+        last_session
     );
 
     :return:

@@ -7,7 +7,7 @@
 {% block content %}
     <!-- Page Content -->
 
-	<a  name="login"></a>
+    <a name="login"></a>
     <div class="content-section-login">
 
         <div class="container page-container">
@@ -32,17 +32,20 @@
 
                 {% if output.analysis.tops.emotion %}
                     <h4>Emotion Analysis </h4>
-                    <p>Based on your last <em>100</em> Facebook posts, your top mood is: <strong>{{ output.analysis.tops.emotion }}</strong></p>
-                {%  endif %}
+                    <p>Based on your last <em>100</em> Facebook posts, your top mood is:
+                        <strong>{{ output.analysis.tops.emotion }}</strong></p>
+                {% endif %}
 
                 {% if output.analysis.tops.political %}
                     <h4>Political Analysis</h4>
-                    <p>Based on your last <em>100</em> Facebook posts, your top political leaning is: <strong>{{ output.analysis.tops.political }}</strong></p>
+                    <p>Based on your last <em>100</em> Facebook posts, your top political leaning is:
+                        <strong>{{ output.analysis.tops.political }}</strong></p>
                 {% endif %}
 
                 {% if output.analysis.tops.personality %}
                     <h4>Personality Analysis</h4>
-                    <p>Based on your last <em>100</em> Facebook posts, your top personality is: <strong>{{ output.analysis.tops.personality }}</strong></p>
+                    <p>Based on your last <em>100</em> Facebook posts, your top personality is:
+                        <strong>{{ output.analysis.tops.personality }}</strong></p>
                 {% endif %}
 
                 {% if playlists_recs and output.analysis.tops.emotion %}
@@ -60,9 +63,10 @@
                                     <td>
                                         <div class="playlist-image-container">
                                             <a href="{{ playlist['images'][0]['url'] }}">
-                                            <img src="{{ playlist['images'][0]['url'] }}" width="100">
+                                                <img src="{{ playlist['images'][0]['url'] }}" width="100" alt="{{ playlist.name }}">
                                             </a>
                                         </div>
+                                    </td>
 
                                 </tr>
                             {% endfor %}
@@ -70,13 +74,39 @@
                         </table>
                     </div>
                 {% endif %}
+                {% if songs %}
+                    <div class="container col-md-6">
+                        <h2>Suggested Songs</h2>
+                        <table class="table">
+                            <tr>
+                                <th>Artist</th>
+                                <th>Name</th>
+                                <th>Image</th>
+                            </tr>
+                            {% for song in songs %}
+                                <tr>
+                                    <td><h4>{{ song.artist }}</h4></td>
+                                    <td><h4><a href="{{ song.spotify_url }}">{{ song }}</a></h4></td>
+                                    <td>
+                                        <a href="{{ song.preview_pic }}">
+                                            <img src="{{ song.preview_pic }}" alt="{{ song.album }}" width="100">
+                                        </a>
+
+                                    </td>
+                                </tr>
+
+                            {% endfor %}
+                        </table>
+                    </div>
+                {% endif %}
+
             </div>
         </div>
         <!-- /.container -->
 
     </div>
     <!-- /.content-section-login -->
-{#        {% if session %}#}
-{#            {{ session }}#}
-{#        {% endif %}#}
+    {#        {% if session %}#}
+    {#            {{ session }}#}
+    {#        {% endif %}#}
 {% endblock %}

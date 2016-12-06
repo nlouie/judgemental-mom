@@ -186,6 +186,7 @@ def login_oauth(provider_name):
         playlists_recs = suggest_emotion_playlist(analysis['tops']['emotion']) # old way
         songs = recommend(analysis, 10) # new_way
 
+        print(songs)
         return render_template('login.html', 
                                result=result, 
                                output=user_data, 
