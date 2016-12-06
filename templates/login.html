@@ -78,15 +78,22 @@
             font-size: 12px;
             color: #222222;
             text-align: center;
+            margin-top: 2px;
             font-weight: 400;
         }
 
         .song-image {
-            width: 80px;
+            width: 100px;
             height: auto;
             margin: 12px auto 0px auto;
             display: block;
             text-align: center;
+        }
+
+        video {
+            display: block;
+            margin: -5px auto 20px auto;
+            width: 95px;
         }
     </style>
 
@@ -141,7 +148,7 @@
                     <h3>Suggested Playlists</h3>
                     <div class="row">
                         {% for playlist in playlists_recs['playlists']['items'] %}
-                             <div class="col-sm-4">
+                             <div class="col-sm-3">
                                 <div class="playlist-image-container">
                                     <a href="{{ playlist['images'][0]['url'] }}">
                                         <img src="{{ playlist['images'][0]['url'] }}" width="100" alt="{{ playlist.name }}">
@@ -156,13 +163,13 @@
                 {% if songs %}
                     <h3>Suggested Songs</h3>
                     {% for song in songs %}
-                        <div class="col-sm-3">
+                        <div class="col-sm-4">
                             <a href="{{ songs[song]['album_spotify_url'] }}" target="_blank">
                                 <img src="{{ songs[song]['album_preview_pic'] }}" class="song-image">
                             </a>
                             <div class="song-name"><a class="song-name" href="{{ songs[song]['song_spotify_url'] }}">{{ song }}</a></div>
                             <div class="song-artist"><a class="song-artist" href="{{ songs[song]['artist_spotify_url'] }}">{{ songs[song]['artist_name'] }}</a></div>
-                            <video controls="" autoplay="" name="media"><source src="{{ songs[song]['song_preview_url'] }}" type="audio/mpeg"></video>
+                            <video controls="" name="media"><source src="{{ songs[song]['song_preview_url'] }}" type="audio/mpeg"></video>
                         </div>
                     {% endfor %}
                 {% endif %}
