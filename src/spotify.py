@@ -127,10 +127,11 @@ def recommend(user_data, n):
     songs = {}
     
     for song in req['tracks']:
-        songs[song['name']]={'artist': song['artists'][0]['name'], \
-                            'preview_url': song['preview_url'], \
-                            'album': song['album']['name'], \
-                            'preview_pic': song['album']['images'][0]['url'], \
-                            'spotify_url': song['external_urls']['spotify']}
+        songs[song['name']]={'artist_name': song['artists'][0]['name'], \
+                             'artist_spotify_url': song['artists'][0]['external_urls']['spotify'], \
+                             'song_preview_url': song['preview_url'], \
+                             'album_name': song['album']['name'], \
+                             'album_preview_pic': song['album']['images'][0]['url'], \
+                             'song_spotify_url': song['external_urls']['spotify']}
         
     return songs
