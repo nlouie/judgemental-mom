@@ -252,5 +252,7 @@ def internal_server_error(error):
 if __name__ == '__main__':
     # http://flask.pocoo.org/docs/0.11/config/
     app.run()
+    # if production
+    #app.run(host="0.0.0.0")
 
 # eof
