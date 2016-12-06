@@ -131,6 +131,7 @@ def recommend(user_data, n):
                              'artist_spotify_url': song['artists'][0]['external_urls']['spotify'], \
                              'song_preview_url': song['preview_url'], \
                              'album_name': song['album']['name'], \
+                             'album_spotify_url': song['album']['external_urls']['spotify'], \
                              'album_preview_pic': song['album']['images'][0]['url'], \
                              'song_spotify_url': song['external_urls']['spotify']}
         
