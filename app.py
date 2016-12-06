@@ -184,7 +184,7 @@ def login_oauth(provider_name):
         analysis = analyze(user_data, app.config['INDICO_KEY'])
         user_data['analysis'] = analysis
         playlists_recs = suggest_emotion_playlist(analysis['tops']['emotion']) # old way
-        songs = recommend(analysis, 10) # new_way
+        songs = recommend(analysis, 8) # new_way
 
         print(songs)
         return render_template('login.html', 

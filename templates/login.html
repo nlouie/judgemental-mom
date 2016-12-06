@@ -9,8 +9,8 @@
     <style>
         .personal-info {
             background-color: #fafafa;
-            padding: 10px 0px 35px 0px;
-            border: .5px solid #888888;
+            padding: 10px 0px 40px 0px;
+            border: .5px solid #aaaaaa;
             margin-top: 10px;
         }
 
@@ -25,7 +25,7 @@
 
         h4 {
             text-align: center !important;
-            color: #666666;
+            color: #333333;
             margin-top: 20px !important;
             font-size: 16px !important;
             text-transform: uppercase !important;
@@ -35,8 +35,9 @@
 
         .based {
             text-align: center;
-            font-weight: 500;
+            font-weight: 400;
             width: 80%;
+            color: #555555;
             display: block;
             margin: 0 auto;
         }
@@ -47,6 +48,45 @@
             font-size: 14px;
             font-weight: 500;
             letter-spacing: .4px;
+        }
+
+        .playlist-image-container {
+            margin: 8px auto 0px auto;
+            display: block;
+            text-align: center;
+        }
+
+        .playlist-link {
+            color: #3291D6 !important;
+        }
+
+        .playlist-link:hover {
+            text-decoration: none !important;
+            color: #3291D6 !important;
+            margin-top: 5px !important;
+        }
+
+        .song-name {
+            font-size: 14px;
+            color: #3291D6;
+            text-align: center;
+            margin-top: 5px;
+            font-weight: 700;
+        }
+
+        .song-artist {
+            font-size: 12px;
+            color: #222222;
+            text-align: center;
+            font-weight: 400;
+        }
+
+        .song-image {
+            width: 80px;
+            height: auto;
+            margin: 12px auto 0px auto;
+            display: block;
+            text-align: center;
         }
     </style>
 
@@ -98,55 +138,33 @@
                 </div>
 
                 {% if playlists_recs and output.analysis.tops.emotion %}
-                    <div class="container col-md-6">
-                        <h2>Suggested Playlists</h2>
-                        <p>Maybe you would care for some {{ output.analysis.tops.emotion }} music?</p>
-                        <table class="table">
-                            {% for playlist in playlists_recs['playlists']['items'] %}
-                                <tr>
-                                    <th>Name</th>
-                                    <th>Image</th>
-                                </tr>
-                                <tr>
-                                    <td><h4><a href="{{ playlist.uri }}">{{ playlist.name }}</a></h4></td>
-                                    <td>
-                                        <div class="playlist-image-container">
-                                            <a href="{{ playlist['images'][0]['url'] }}">
-                                                <img src="{{ playlist['images'][0]['url'] }}" width="100" alt="{{ playlist.name }}">
-                                            </a>
-                                        </div>
-                                    </td>
-
-                                </tr>
-                            {% endfor %}
-
-                        </table>
+                    <h3>Suggested Playlists</h3>
+                    <div class="row">
+                        {% for playlist in playlists_recs['playlists']['items'] %}
+                             <div class="col-sm-4">
+                                <div class="playlist-image-container">
+                                    <a href="{{ playlist['images'][0]['url'] }}">
+                                        <img src="{{ playlist['images'][0]['url'] }}" width="100" alt="{{ playlist.name }}">
+                                    </a>
+                                    <p style="margin-top: 5px;"><a class="playlist-link" href="{{ playlist.uri }}">{{ playlist.name }}</a></p>
+                                </div>
+                            </div>
+                        {% endfor %}
                     </div>
                 {% endif %}
+
                 {% if songs %}
-                    <div class="container col-md-6">
-                        <h2>Suggested Songs</h2>
-                        <table class="table">
-                            <tr>
-                                <th>Artist</th>
-                                <th>Name</th>
-                                <th>Image</th>
-                            </tr>
-                            {% for song in songs %}
-                                <tr>
-                                    <td><h4><a href="{{ songs[song]['artist_spotify_url'] }}">{{ songs[song]['artist_name'] }}</a></h4></td>
-                                    <td><h4><a href="{{ songs[song]['song_spotify_url'] }}">{{ song }}</a></h4></td>
-                                    <td>
-                                        <a href="{{ songs[song]['album_spotify_url'] }}">
-                                            <img src="{{ songs[song]['album_preview_pic'] }}" width="100">
-                                        </a>
-
-                                    </td>
-                                </tr>
-
-                            {% endfor %}
-                        </table>
-                    </div>
+                    <h3>Suggested Songs</h3>
+                    {% for song in songs %}
+                        <div class="col-sm-3">
+                            <a href="{{ songs[song]['album_spotify_url'] }}" target="_blank">
+                                <img src="{{ songs[song]['album_preview_pic'] }}" class="song-image">
+                            </a>
+                            <div class="song-name"><a class="song-name" href="{{ songs[song]['song_spotify_url'] }}">{{ song }}</a></div>
+                            <div class="song-artist"><a class="song-artist" href="{{ songs[song]['artist_spotify_url'] }}">{{ songs[song]['artist_name'] }}</a></div>
+                            <video controls="" autoplay="" name="media"><source src="{{ songs[song]['song_preview_url'] }}" type="audio/mpeg"></video>
+                        </div>
+                    {% endfor %}
                 {% endif %}
 
             </div>
