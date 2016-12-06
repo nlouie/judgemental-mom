@@ -206,7 +206,6 @@ def analyze(user_data, indico_api_key):
     text_analysis_list = ['emotion', 'political', 'personality']
     results['messages'] = analyze_messages(user_data, indico_api_key, text_analysis_list)
     results['tops'] = extract_tops(results['messages'], text_analysis_list)
-    print(results)
     return results
 
 # eof
