@@ -25,7 +25,7 @@ from functools import wraps
 
 from src.analyze import analyze, extract_facebook
 from src.register import db_user
-from src.spotify import suggest_emotion_playlist
+from src.spotify import suggest_emotion_playlist, recommend
 
 # for testing
 from test import test_me
@@ -183,9 +183,14 @@ def login_oauth(provider_name):
         user_database.add_app_token(result.user.id, result.user.credentials)
         analysis = analyze(user_data, app.config['INDICO_KEY'])
         user_data['analysis'] = analysis
-        playlists_recs = suggest_emotion_playlist(analysis['tops']['emotion'])
+        playlists_recs = suggest_emotion_playlist(analysis['tops']['emotion']) # old way
+        songs = recommend(analysis, 10) # new_way
 
-        return render_template('login.html', result=result, output=user_data, playlists_recs=playlists_recs)
+        return render_template('login.html', 
+                               result=result, 
+                               output=user_data, 
+                               playlists_recs=playlists_recs, # old way
+                               songs=songs) # new_way
 
     # Don't forget to return the response.
     return response
