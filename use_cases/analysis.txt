@@ -1,4 +1,0 @@
-Corey Clemente
-"Analysis Use Case"
-
-The user will provide "Judgmental Mom" (JM) with access to at least one social media account, such as Facebook or Twitter. The user can also provide music account access to services like Spotify or Apple Music. JM will take all this account data (ex. posts, friends and personal information) and analyze this data to generate a report on the user. This report has three main sections: music playlist suggestion, friend comparison, and personality analysis. The music playlist suggestion gives the user new music to listen to by predicting favorability based on user data. The friend comparison provides the user with  graphs and data points showing similarities and differences between friends based on all data. The personality analysis nicely wraps all the data given into a few values, such as economic and political leaning, grammar and most used themes, etc.

@@ -144,3 +144,4 @@ ENV/
 .ropeproject
 
 *.db
+flask_session/

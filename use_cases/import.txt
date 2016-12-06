@@ -1,4 +1,0 @@
-Derek Mei
-"Import Use Case"
-
-The user should be able to provide "Judgmental Mom" (JM) with access to their previous Facebook posts and friends list. After providing JM access to their information, JM should be able to pass an aggregation of the user's posts, information, and data into a text analysis API, which will generate a report and compare it to other friends in the user's social network. This will allow a user to see visualized metrics such as the degree of similarity to others in the user's social network as well as recommended playlists and artists.

@@ -1,2 +1,0 @@
-Nick Louie - Delete Account
-As a User, I would like to be able to completely delete my account for security purposes. This should involve a complete removal from the database along with any personal information kept on the user. Perhaps even expire the user’s cookie as well.
