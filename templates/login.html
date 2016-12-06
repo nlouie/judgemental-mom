@@ -173,8 +173,8 @@
                             <a href="{{ songs[song]['album_spotify_url'] }}" target="_blank">
                                 <img src="{{ songs[song]['album_preview_pic'] }}" class="song-image">
                             </a>
-                            <div class="song-name"><a class="song-name" href="{{ songs[song]['song_spotify_url'] }}">{{ song }}</a></div>
-                            <div class="song-artist"><a class="song-artist" href="{{ songs[song]['artist_spotify_url'] }}">{{ songs[song]['artist_name'] }}</a></div>
+                            <div class="song-name"><a class="song-name" target="_blank" href="{{ songs[song]['song_spotify_url'] }}">{{ song }}</a></div>
+                            <div class="song-artist"><a class="song-artist" target="_blank" href="{{ songs[song]['artist_spotify_url'] }}">{{ songs[song]['artist_name'] }}</a></div>
                             <video controls="" name="media"><source src="{{ songs[song]['song_preview_url'] }}" type="audio/mpeg"></video>
                         </div>
                     {% endfor %}
