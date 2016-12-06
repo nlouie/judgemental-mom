@@ -158,7 +158,7 @@
                                     <a href="{{ playlist['external_urls']['spotify'] }}" target="_blank">
                                         <img src="{{ playlist['images'][0]['url'] }}" width="100" alt="{{ playlist.name }}">
                                     </a>
-                                    <p style="margin-top: 5px;"><a class="playlist-link" href="{{ playlist['external_urls']['spotify'] }}">{{ playlist.name }}</a></p>
+                                    <p style="margin-top: 5px;"><a class="playlist-link" target="_blank" href="{{ playlist['external_urls']['spotify'] }}">{{ playlist.name }}</a></p>
                                 </div>
                             </div>
                         {% endfor %}
