@@ -31,28 +31,6 @@ TABLE_SCHEMA = \
     );
     '''
 
-
-def gen_test_table():
-    """
-    Currently not working and in development!
-    Properly creating a table with dataset / sqlalchemy but it's currently not working :(
-    http://docs.sqlalchemy.org/en/rel_1_1/core/metadata.html?highlight=autoincrement#sqlalchemy.schema.Column.params.autoincrement
-    Same functionality as
-
-        CREATE TABLE IF NOT EXISTS ''' + TABLE_NAME_USERS + '''
-    (
-        id INTEGER PRIMARY KEY AUTOINCREMENT,
-        fb_name VARCHAR(255) NOT NULL,
-        fb_email VARCHAR(255) NOT NULL UNIQUE,
-        fb_oauth_token VARCHAR(255) NOT NULL UNIQUE,
-        fb_app_token VARCHAR(255),
-        num_uses INTEGER NOT NULL DEFAULT 0
-        last_session
-    );
-
-    :return:
-    """
-
 # ------------------ Helpers --------------------- #
 
 
@@ -153,12 +131,11 @@ def increment_num_uses(fb_oauth_token):
     :param fb_oauth_token:
     :return:
     """
-    db = get_db()
-    tb = db[TABLE_NAME_USERS]
-    user = tb.find_one(fb_oauth_token=fb_oauth_token)
-    user_num_uses = user['num_uses']
-    # bug ^
     try:
+        db = get_db()
+        tb = db[TABLE_NAME_USERS]
+        user = tb.find_one(fb_oauth_token=fb_oauth_token)
+        user_num_uses = user['num_uses']
         tb.update(dict(fb_oauth_token=fb_oauth_token,
                        num_uses=user_num_uses + 1), ['fb_oauth_token'])
         return True
