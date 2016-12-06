@@ -6,6 +6,49 @@
 {% endblock %}
 {% block content %}
     <!-- Page Content -->
+    <style>
+        .personal-info {
+            background-color: #fafafa;
+            padding: 10px 0px 35px 0px;
+            border: .5px solid #888888;
+            margin-top: 10px;
+        }
+
+        h3 {
+            text-align: center !important;
+            margin-top: 30px !important;
+            font-size: 20px !important;
+            text-transform: uppercase !important;
+            font-weight: 700 !important;
+            letter-spacing: .4px !important;
+        }
+
+        h4 {
+            text-align: center !important;
+            color: #666666;
+            margin-top: 20px !important;
+            font-size: 16px !important;
+            text-transform: uppercase !important;
+            font-weight: 700 !important;
+            letter-spacing: .4px !important;
+        }
+
+        .based {
+            text-align: center;
+            font-weight: 500;
+            width: 80%;
+            display: block;
+            margin: 0 auto;
+        }
+
+        .sub-info {
+            text-align: center;
+            margin-top: 6px;
+            font-size: 14px;
+            font-weight: 500;
+            letter-spacing: .4px;
+        }
+    </style>
 
     <a name="login"></a>
     <div class="content-section-login">
@@ -15,38 +58,44 @@
                 <!-- <br /> -->
                 <!-- <br /> -->
                 <!-- <br /> -->
-                <h1>Your Judgemental Mom Results</h1>
-                {% if result.error %}
-                    <h3>Damn that error: {{ result.error.message }}</h3>
-                {% endif %}
+                <div class="personal-info">
+                    {% if output %}
+                        <h3>{{ output.name }}'s Judgemental Mom Results</h3>
+                        <div class="sub-info">Your email is: {{ output.email }}</div>
+                        <div class="sub-info">Your relationship status is: {{ output.relationship_status }}</div>
+                        <div class="sub-info">Your gender is: {{ output.gender }}</div>
+                        {% if result.error %}
+                            <h3>Damn that error: {{ result.error.message }}</h3>
+                        {% endif %}
+                        <!-- <h5>Your id is: {{ output.oauth_id }}</h5> -->
 
-                {% if output %}
-                    <h3>Hi {{ output.name }}</h3>
-                    <!-- <h5>Your id is: {{ output.oauth_id }}</h5> -->
-                    <h5>Your email is: {{ output.email }}</h5>
-                    <h5>Your relationship status is: {{ output.relationship_status }}</h5>
-                    <h5>Your gender is: {{ output.gender }}</h5>
-                {% endif %}
+                    {% endif %}
 
-                <h3>Facebook Posts Analysis</h3>
+                    <div class="row">
+                        <div class="col-sm-4">
+                            {% if output.analysis.tops.emotion %}
+                            <h4>Emotion Analysis </h4>
+                                <p class="based">Based on your last <em>100</em> Facebook posts, your top mood is:
+                                    <strong>{{ output.analysis.tops.emotion }}</strong></p>
+                            {% endif %}
+                        </div>
 
-                {% if output.analysis.tops.emotion %}
-                    <h4>Emotion Analysis </h4>
-                    <p>Based on your last <em>100</em> Facebook posts, your top mood is:
-                        <strong>{{ output.analysis.tops.emotion }}</strong></p>
-                {% endif %}
-
-                {% if output.analysis.tops.political %}
-                    <h4>Political Analysis</h4>
-                    <p>Based on your last <em>100</em> Facebook posts, your top political leaning is:
-                        <strong>{{ output.analysis.tops.political }}</strong></p>
-                {% endif %}
-
-                {% if output.analysis.tops.personality %}
-                    <h4>Personality Analysis</h4>
-                    <p>Based on your last <em>100</em> Facebook posts, your top personality is:
-                        <strong>{{ output.analysis.tops.personality }}</strong></p>
-                {% endif %}
+                        <div class="col-sm-4">
+                            {% if output.analysis.tops.political %}
+                                <h4>Political Analysis</h4>
+                                <p class="based">Based on your last <em>100</em> Facebook posts, your top political leaning is:
+                                    <strong>{{ output.analysis.tops.political }}</strong></p>
+                            {% endif %}
+                        </div>
+                        <div class="col-sm-4">
+                            {% if output.analysis.tops.personality %}
+                                <h4>Personality Analysis</h4>
+                                <p class="based">Based on your last <em>100</em> Facebook posts, your top personality is:
+                                    <strong>{{ output.analysis.tops.personality }}</strong></p>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
 
                 {% if playlists_recs and output.analysis.tops.emotion %}
                     <div class="container col-md-6">

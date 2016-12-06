@@ -19,3 +19,13 @@
     padding-bottom: 50px;
 }
 
+#logo {
+    height:35px;
+    width:auto;
+    margin-top:-6px;
+    margin-left: -3px;
+}
+
+.navbar-brand {
+    padding: 15px 0px !important;
+}

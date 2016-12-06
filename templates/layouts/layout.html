@@ -41,7 +41,11 @@
     {% endblock %}
 </head>
 <body>
+    <style>
 
+
+
+    </style>
 
     <!-- Navigation -->
     <nav class="navbar navbar-default navbar-fixed-top topnav" role="navigation">
@@ -54,7 +58,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand topnav" href="{{ url_for('hello_world') }}">Judgemental Mom</a>
+                <a class="navbar-brand topnav" href="{{ url_for('hello_world') }}"><img src="{{ url_for('static', filename='img/logo.png') }}" id="logo"></a>
             </div>
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
