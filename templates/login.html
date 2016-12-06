@@ -85,11 +85,11 @@
                             </tr>
                             {% for song in songs %}
                                 <tr>
-                                    <td><h4>{{ song.artist }}</h4></td>
-                                    <td><h4><a href="{{ song.spotify_url }}">{{ song }}</a></h4></td>
+                                    <td><h4>{{ songs[song]['artist'] }}</h4></td>
+                                    <td><h4><a href="{{ songs[song]['spotify_url'] }}">{{ song }}</a></h4></td>
                                     <td>
                                         <a href="{{ song.preview_pic }}">
-                                            <img src="{{ song.preview_pic }}" alt="{{ song.album }}" width="100">
+                                            <img src="{{ songs[song]['preview_pic'] }}" alt="{{ songs[song]['spotify_url'] }}" width="100">
                                         </a>
 
                                     </td>
