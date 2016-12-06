@@ -11,6 +11,12 @@
 #           https://developer.spotify.com/web-api/console/get-search-item/?q=%22doom%20metal%22&type=playlist
 
 import requests
+from json import load
+
+def get_params():
+    return load(open('auth.json', 'r'))
+    
+PARAMS = get_params()
 
 def suggest_emotion_playlist(top_mood):
     """
@@ -45,8 +51,8 @@ def get_new_access_token():
     
     :return: str
     """
-    client_id = "f322fdb8adf3497287c37b85449f35e3"
-    client_secret = "1c9f064a0962413c8afe56c061e6facc"
+    client_id = PARAMS['spotify']['client_id']
+    client_secret = PARAMS['spotify']['client_secret']
     
     data = {'grant_type' : 'client_credentials'}
     url = 'https://accounts.spotify.com/api/token'
