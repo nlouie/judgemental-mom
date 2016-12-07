@@ -26,6 +26,7 @@ from functools import wraps
 from src.analyze import analyze, extract_facebook
 from src.register import db_user
 from src.spotify import suggest_emotion_playlist, recommend
+from src.fitbit import run_fibit
 
 # for testing
 from test import test_me
@@ -45,6 +46,9 @@ app.config['SESSION_TYPE'] = 'filesystem'
 app.config['DEBUG'] = True
 app.config['FB_KEY'] = auth_keys['facebook']['app_secret']
 app.config['INDICO_KEY'] = auth_keys['indico']['api_key']
+app.config['FITBIT_KEY'] = auth_keys['fitbit']['fitbit-secret']
+app.config['FITBIT_AUTH'] = auth_keys['fitbit']['authorization']
+app.config['FITBIT_ID'] = auth_keys['fitbit']['client-id']
 
 # Instantiate Authomatic.
 authomatic = Authomatic(CONFIG, auth_keys['flask']['secret_key'], report_errors=False)
@@ -194,6 +198,19 @@ def login_oauth(provider_name):
 
     # Don't forget to return the response.
     return response
+
+
+@app.route('/fitbit/',methods=['GET'])
+def view_fitbit():
+    if request.method == 'GET':
+        try:
+            code = request.args['code']
+            print('CODE EXTRACTED! : ' + str(code))
+            # extracts and prints output to output.txt
+            run_fibit(code)
+            return render_template('index.html')
+        except:
+            return render_template('index.html')
 
 
 @app.route('/logout', methods=['POST'])

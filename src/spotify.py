@@ -13,10 +13,13 @@
 import requests
 from json import load
 
+
 def get_params():
     return load(open('auth.json', 'r'))
-    
+
+
 PARAMS = get_params()
+
 
 def suggest_emotion_playlist(top_mood):
     """
@@ -45,6 +48,7 @@ def suggest_emotion_playlist(top_mood):
     else:
         return {'error': {'message': 'problem with request'}}
 
+
 def get_new_access_token():
     """
     get a new access token from spotify to run recommendation API
@@ -53,13 +57,14 @@ def get_new_access_token():
     """
     client_id = PARAMS['spotify']['client_id']
     client_secret = PARAMS['spotify']['client_secret']
-    
-    data = {'grant_type' : 'client_credentials'}
+
+    data = {'grant_type': 'client_credentials'}
     url = 'https://accounts.spotify.com/api/token'
-    
-    req = requests.post(url, data=data, auth=(client_id, client_secret)) 
-    
+
+    req = requests.post(url, data=data, auth=(client_id, client_secret))
+
     return req.json()['access_token']
+
 
 def recommend(user_data, n):
     """
@@ -71,23 +76,23 @@ def recommend(user_data, n):
     :return: dict
     """
     headers = {'Authorization': 'Bearer ' + get_new_access_token()}
-    
-    params = dict(target_acousticness=None, # 0 to 1, float
-                  target_danceability=None, # 0 to 1, float
-                  target_energy=None, # 0 to 1, float
-                  target_populatiry=None, # 0 to 100, float
+
+    params = dict(target_acousticness=None,  # 0 to 1, float
+                  target_danceability=None,  # 0 to 1, float
+                  target_energy=None,  # 0 to 1, float
+                  target_populatiry=None,  # 0 to 100, float
                   target_valence=None,
                   genre=None)
-    
+
     # important values
     v = {}
-    
+
     for key in user_data['messages']:
         for key2 in user_data['messages'][key]['results']:
             v[key2.lower()] = user_data['messages'][key]['results'][key2]
     for key in user_data['tops']:
         v[key.lower()] = user_data['tops'][key]
-    
+
     # genre
     if v['emotion'] == 'anger':
         params['genre'] = 'edm,grunge,heavy-metal,punk-rock,hard-rock'
@@ -95,13 +100,13 @@ def recommend(user_data, n):
         params['genre'] = 'acoustic,ambient,songwriter,soul'
     else:
         params['genre'] = 'alternative,ambient,blues,hard-rock,soul'
-        
+
     # other things
-    params['target_valence'] = min(1, v['joy'] + .5*v['surprise'])
-    params['target_popularity'] = int(max(.2, 1 - v['libertarian'] - .4*v['green']) * 100)
+    params['target_valence'] = min(1, v['joy'] + .5 * v['surprise'])
+    params['target_popularity'] = int(max(.2, 1 - v['libertarian'] - .4 * v['green']) * 100)
     params['target_acousticness'] = min(.8, (v['agreeableness'] + v['conscientiousness']) / 1.5)
-    params['target_danceability'] = max(0, params['target_valence']*v['extraversion'])
-    
+    params['target_danceability'] = max(0, params['target_valence'] * v['extraversion'])
+
     extra = ''
     for key in params:
         if key == 'genre':
@@ -112,27 +117,25 @@ def recommend(user_data, n):
             extra += '&%s=%.3f' % (key, params[key])
         else:
             pass
-        
-    
+
     # EDIT PARAMS BASED ON USER_DATA
-    
+
     base_url = 'https://api.spotify.com/v1/recommendations?market=US&limit=%d' % n
     url = base_url + extra
-    
-    
+
     # make spotify request              
     req = requests.get(url, headers=headers).json()
-    
+
     # build dict with songs
     songs = {}
-    
+
     for song in req['tracks']:
-        songs[song['name']]={'artist_name': song['artists'][0]['name'], \
-                             'artist_spotify_url': song['artists'][0]['external_urls']['spotify'], \
-                             'song_preview_url': song['preview_url'], \
-                             'album_name': song['album']['name'], \
-                             'album_spotify_url': song['album']['external_urls']['spotify'], \
-                             'album_preview_pic': song['album']['images'][0]['url'], \
-                             'song_spotify_url': song['external_urls']['spotify']}
-        
+        songs[song['name']] = {'artist_name': song['artists'][0]['name'], \
+                               'artist_spotify_url': song['artists'][0]['external_urls']['spotify'], \
+                               'song_preview_url': song['preview_url'], \
+                               'album_name': song['album']['name'], \
+                               'album_spotify_url': song['album']['external_urls']['spotify'], \
+                               'album_preview_pic': song['album']['images'][0]['url'], \
+                               'song_spotify_url': song['external_urls']['spotify']}
+
     return songs
