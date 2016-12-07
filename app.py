@@ -213,7 +213,7 @@ def view_fitbit():
             code = request.args['code']
             print('FITBIT CODE EXTRACTED! : ' + str(code))
             # extracts and prints output to output.txt
-            run_fibit(code, app.config['FITBIT_KEY'])
+            run_fibit(code)
             return render_template('index.html')
         except:
             return render_template('index.html')
