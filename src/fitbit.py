@@ -47,7 +47,7 @@ https://www.fitbit.com/oauth2/authorize?response_type=code&client_id=228349&redi
 """
 
 user_code = ""
-fitbit_secret = "7d32f03074a2d982d637f8ab1af0b6fe"
+fitbit_secret = ""
 fitbit_authorization = "Basic MjI4MzQ5OjdkMzJmMDMwNzRhMmQ5ODJkNjM3ZjhhYjFhZjBiNmZl"
 fitbit_client_id = "228349"
 
@@ -94,6 +94,10 @@ EXTRACTION_URLS = {
 
 # ----------------- FUNCTIONS --------------------------------------------#
 
+
+def get_auth_url():
+    url = "https://www.fitbit.com/oauth2/authorize?response_type=code&client_id=228349&redirect_uri=http%3A%2F%2F45.55.134.62%3A5000%2Ffitbit&scope=activity%20heartrate%20location%20nutrition%20profile%20settings%20sleep%20social%20weight&expires_in=604800"
+    return url
 
 def get_new_access_token(refresh_token):
     """
@@ -183,8 +187,8 @@ def extract_fitbit(CODE):
 
 
 
-def run_fibit(code):
+def run_fibit(code, secret):
     user_code = code
-    # fitbit_secret = secret
+    fitbit_secret = secret
     # fitbit_authorization = authorization
     extract_fitbit(code)

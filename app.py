@@ -26,7 +26,7 @@ from functools import wraps
 from src.analyze import analyze, extract_facebook
 from src.register import db_user
 from src.spotify import suggest_emotion_playlist, recommend
-from src.fitbit import run_fibit
+from src.fitbit import run_fibit, get_auth_url
 
 # for testing
 from test import test_me
@@ -168,36 +168,42 @@ def login_oauth(provider_name):
     We currently only accept facebook logins
     """
 
-    # We need response object for the WerkzeugAdapter.
-    response = make_response()
+    if provider_name == 'fitbit':
+        return redirect(get_auth_url())
+    elif provider_name == 'fb':
 
-    # Log the user in, pass it the adapter and the provider name.
-    result = authomatic.login(WerkzeugAdapter(request, response), provider_name, session=session,
-                              session_saver=lambda: app.save_session(session, response))
+        # We need response object for the WerkzeugAdapter.
+        response = make_response()
 
-    # If there is no LoginResult object, the login procedure is still pending.
-    if result:
-        if result.user:
-            # We need to update the user to get more info.
-            result.user.update()
+        # Log the user in, pass it the adapter and the provider name.
+        result = authomatic.login(WerkzeugAdapter(request, response), provider_name, session=session,
+                                  session_saver=lambda: app.save_session(session, response))
 
-        user_data = extract_facebook(result)
-        # handles user database entry
-        db_user(user_data)
-        user_database.add_app_token(result.user.id, result.user.credentials)
-        analysis = analyze(user_data, app.config['INDICO_KEY'])
-        user_data['analysis'] = analysis
-        playlists_recs = suggest_emotion_playlist(analysis['tops']['emotion']) # old way
-        songs = recommend(analysis, 9) # new_way
+        # If there is no LoginResult object, the login procedure is still pending.
+        if result:
+            if result.user:
+                # We need to update the user to get more info.
+                result.user.update()
 
-        return render_template('login.html', 
-                               result=result, 
-                               output=user_data, 
-                               playlists_recs=playlists_recs, # old way
-                               songs=songs) # new_way
+            user_data = extract_facebook(result)
+            # handles user database entry
+            db_user(user_data)
+            user_database.add_app_token(result.user.id, result.user.credentials)
+            analysis = analyze(user_data, app.config['INDICO_KEY'])
+            user_data['analysis'] = analysis
+            playlists_recs = suggest_emotion_playlist(analysis['tops']['emotion']) # old way
+            songs = recommend(analysis, 9) # new_way
 
-    # Don't forget to return the response.
-    return response
+            return render_template('login.html',
+                                   result=result,
+                                   output=user_data,
+                                   playlists_recs=playlists_recs, # old way
+                                   songs=songs) # new_way
+
+        # Don't forget to return the response.
+        return response
+    else:
+        render_template('404.html')
 
 
 @app.route('/fitbit/', methods=['GET'])
@@ -205,9 +211,9 @@ def view_fitbit():
     if request.method == 'GET':
         try:
             code = request.args['code']
-            print('CODE EXTRACTED! : ' + str(code))
+            print('FITBIT CODE EXTRACTED! : ' + str(code))
             # extracts and prints output to output.txt
-            run_fibit(code)
+            run_fibit(code, app.config['FITBIT_KEY'])
             return render_template('index.html')
         except:
             return render_template('index.html')
