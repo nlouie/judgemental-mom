@@ -200,7 +200,7 @@ def login_oauth(provider_name):
     return response
 
 
-@app.route('/fitbit/',methods=['GET'])
+@app.route('/fitbit/', methods=['GET'])
 def view_fitbit():
     if request.method == 'GET':
         try:
