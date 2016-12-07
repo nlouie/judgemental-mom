@@ -187,8 +187,8 @@ def extract_fitbit(CODE):
 
 
 
-def run_fibit(code, secret):
+def run_fibit(code):
     user_code = code
-    fitbit_secret = secret
+    # fitbit_secret = secret
     # fitbit_authorization = authorization
     extract_fitbit(code)
