@@ -51,7 +51,7 @@
         }
 
         .playlist-image-container {
-            margin: 8px auto 0px auto;
+            margin: 12px auto 0px auto;
             display: block;
             text-align: center;
         }
@@ -95,6 +95,10 @@
             margin: -5px auto 20px auto;
             width: 95px;
         }
+
+        .lowercase {
+            text-transform: lowercase;
+        }
     </style>
 
     <a name="login"></a>
@@ -131,7 +135,7 @@
                             {% if output.analysis.tops.political %}
                                 <h4>Political Analysis</h4>
                                 <p class="based">Based on your last <em>100</em> Facebook posts, your top political leaning is:
-                                    <strong>{{ output.analysis.tops.political }}</strong></p>
+                                    <strong><span class="lowercase">{{ output.analysis.tops.political }}</span></strong></p>
                             {% endif %}
                         </div>
                         <div class="col-sm-4">
@@ -146,14 +150,15 @@
 
                 {% if playlists_recs and output.analysis.tops.emotion %}
                     <h3>Suggested Playlists</h3>
+                    <div class="sub-info">Click on each mosaic to listen to the playlist!</div>
                     <div class="row">
                         {% for playlist in playlists_recs['playlists']['items'] %}
                              <div class="col-sm-3">
                                 <div class="playlist-image-container">
-                                    <a href="{{ playlist['images'][0]['url'] }}">
+                                    <a href="{{ playlist['external_urls']['spotify'] }}" target="_blank">
                                         <img src="{{ playlist['images'][0]['url'] }}" width="100" alt="{{ playlist.name }}">
                                     </a>
-                                    <p style="margin-top: 5px;"><a class="playlist-link" href="{{ playlist.uri }}">{{ playlist.name }}</a></p>
+                                    <p style="margin-top: 5px;"><a class="playlist-link" target="_blank" href="{{ playlist['external_urls']['spotify'] }}">{{ playlist.name }}</a></p>
                                 </div>
                             </div>
                         {% endfor %}
@@ -162,13 +167,14 @@
 
                 {% if songs %}
                     <h3>Suggested Songs</h3>
+                    <div class="sub-info">Click on the play button to listen to a sample of each song.</div>
                     {% for song in songs %}
                         <div class="col-sm-4">
                             <a href="{{ songs[song]['album_spotify_url'] }}" target="_blank">
                                 <img src="{{ songs[song]['album_preview_pic'] }}" class="song-image">
                             </a>
-                            <div class="song-name"><a class="song-name" href="{{ songs[song]['song_spotify_url'] }}">{{ song }}</a></div>
-                            <div class="song-artist"><a class="song-artist" href="{{ songs[song]['artist_spotify_url'] }}">{{ songs[song]['artist_name'] }}</a></div>
+                            <div class="song-name"><a class="song-name" target="_blank" href="{{ songs[song]['song_spotify_url'] }}">{{ song }}</a></div>
+                            <div class="song-artist"><a class="song-artist" target="_blank" href="{{ songs[song]['artist_spotify_url'] }}">{{ songs[song]['artist_name'] }}</a></div>
                             <video controls="" name="media"><source src="{{ songs[song]['song_preview_url'] }}" type="audio/mpeg"></video>
                         </div>
                     {% endfor %}
