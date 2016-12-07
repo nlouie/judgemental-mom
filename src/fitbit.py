@@ -38,6 +38,12 @@ do not have permission to use.
 
 More info about authentication: https://dev.fitbit.com/docs/oauth2/
 
+
+Production link:
+
+https://www.fitbit.com/oauth2/authorize?response_type=code&client_id=228349&redirect_uri=http%3A%2F%2F45.55.134.62%3A5000%2Ffitbit&scope=activity%20heartrate%20location%20nutrition%20profile%20settings%20sleep%20social%20weight&expires_in=604800
+
+
 """
 
 user_code = ""
@@ -148,10 +154,13 @@ def extract_fitbit(CODE):
     :return: -o output.txt by default.
     """
 
+    redirect_url = "http://45.55.134.62:5000/fitbit"
+    # redirect_url = 'https://judgementalmom.com/fitbit'
+
     oauth_request_data = {
         'clientId': fitbit_client_id,
         'grant_type': 'authorization_code',
-        'redirect_uri': 'https://judgementalmom.com/fitbit',
+        'redirect_uri': redirect_url,
         'code': CODE
     }
 
