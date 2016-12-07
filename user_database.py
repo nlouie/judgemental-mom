@@ -47,7 +47,7 @@ def get_table(table_name):
 
 
 def drop_table(table_name):
-    try :
+    try:
         db = get_db()
         result = db[table_name].drop()
         return result
